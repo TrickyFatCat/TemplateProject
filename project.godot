@@ -1,0 +1,147 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=4
+
+_global_script_classes=[ {
+"base": "Node",
+"class": "BaseLevel",
+"language": "GDScript",
+"path": "res://src/main/BaseLevels/BaseLevel.gd"
+}, {
+"base": "Node",
+"class": "BaseResource",
+"language": "GDScript",
+"path": "res://src/main/BaseResources/BaseResource.gd"
+}, {
+"base": "Area2D",
+"class": "DamageDetector",
+"language": "GDScript",
+"path": "res://src/main/SpecificNodes/DamageDetector/DamageDetector.gd"
+}, {
+"base": "BaseResource",
+"class": "HitPoints",
+"language": "GDScript",
+"path": "res://src/main/BaseResources/HitPoints/HitPoints.gd"
+}, {
+"base": "KinematicBody2D",
+"class": "Player",
+"language": "GDScript",
+"path": "res://src/Player/Player.gd"
+}, {
+"base": "Position2D",
+"class": "PlayerCamera",
+"language": "GDScript",
+"path": "res://src/singletons/PlayerCamera/PlayerCamera.gd"
+}, {
+"base": "Node",
+"class": "State",
+"language": "GDScript",
+"path": "res://src/main/StateMachine/State.gd"
+}, {
+"base": "Node",
+"class": "StateMachine",
+"language": "GDScript",
+"path": "res://src/main/StateMachine/StateMachine.gd"
+}, {
+"base": "Node2D",
+"class": "Weapon",
+"language": "GDScript",
+"path": "res://src/main/BaseWeapon/BaseWeapon.gd"
+}, {
+"base": "Node2D",
+"class": "WeaponController",
+"language": "GDScript",
+"path": "res://src/main/BaseWeaponController/BaseWeaponController.gd"
+} ]
+_global_script_class_icons={
+"BaseLevel": "",
+"BaseResource": "",
+"DamageDetector": "",
+"HitPoints": "",
+"Player": "",
+"PlayerCamera": "",
+"State": "res://assets/EngineIcons/icon_state.svg",
+"StateMachine": "res://assets/EngineIcons/icon_stateMachine.svg",
+"Weapon": "",
+"WeaponController": ""
+}
+
+[application]
+
+config/name="TemplateProject"
+run/main_scene="res://levels/SplashScreens/SplashScreenGodot.tscn"
+config/icon="res://icon.png"
+
+[autoload]
+
+Events="*res://src/singletons/Events.gd"
+LevelController="*res://src/singletons/LevelController.gd"
+GameSaver="*res://src/singletons/GameSaver.gd"
+TransitionScreen="*res://src/singletons/TransitionScreen/TransitionScreen.tscn"
+GameManager="*res://src/singletons/GameManager/GameManager.tscn"
+
+[input]
+
+move_up={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":87,"unicode":0,"echo":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777232,"unicode":0,"echo":false,"script":null)
+, Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"button_index":12,"pressure":0.0,"pressed":false,"script":null)
+, Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":-1,"axis":1,"axis_value":-1.0,"script":null)
+ ]
+}
+move_down={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":83,"unicode":0,"echo":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777234,"unicode":0,"echo":false,"script":null)
+, Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"button_index":13,"pressure":0.0,"pressed":false,"script":null)
+, Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":-1,"axis":1,"axis_value":1.0,"script":null)
+ ]
+}
+move_left={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":65,"unicode":0,"echo":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777231,"unicode":0,"echo":false,"script":null)
+, Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"button_index":14,"pressure":0.0,"pressed":false,"script":null)
+, Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":-1,"axis":0,"axis_value":-1.0,"script":null)
+ ]
+}
+move_right={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":68,"unicode":0,"echo":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777233,"unicode":0,"echo":false,"script":null)
+, Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"button_index":15,"pressure":0.0,"pressed":false,"script":null)
+, Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":-1,"axis":0,"axis_value":1.0,"script":null)
+ ]
+}
+dash={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":32,"unicode":0,"echo":false,"script":null)
+, Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"button_index":4,"pressure":0.0,"pressed":false,"script":null)
+ ]
+}
+shoot={
+"deadzone": 0.5,
+"events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":1,"pressed":false,"doubleclick":false,"script":null)
+, Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"button_index":5,"pressure":0.0,"pressed":false,"script":null)
+ ]
+}
+
+[layer_names]
+
+2d_physics/layer_1="Player"
+2d_physics/layer_2="Enemy"
+2d_physics/layer_3="Environment"
+2d_physics/layer_4="PlayerProjectile"
+2d_physics/layer_5="EnemyProjectile"
+2d_physics/layer_6="Explosion"
+
+[rendering]
+
+environment/default_environment="res://default_env.tres"
