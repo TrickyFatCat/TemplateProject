@@ -6,6 +6,7 @@ const QUIT_GAME : String = "quit"
 
 var player : Player
 var playerCamera : PlayerCamera
+var current_level : BaseLevel
 var transition_command : String
 
 

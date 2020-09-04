@@ -65,5 +65,6 @@ script = ExtResource( 6 )
 
 [node name="Death" type="Node" parent="StateMachine"]
 script = ExtResource( 6 )
+[connection signal="get_damage" from="DamageDetector" to="." method="_on_DamageDetector_get_damage"]
 [connection signal="value_decreased" from="HitPoints" to="." method="_on_HitPoints_value_decreased"]
 [connection signal="value_zero" from="HitPoints" to="." method="_on_HitPoints_value_zero"]

@@ -31,7 +31,7 @@ func _update_position(velocity: Vector2 = Vector2.ZERO) -> void:
 	camera.position = lerp(camera.position, target_position, CAMERA_FOLLOW_SPEED)
 
 
-func apply_shake(
+func apply_camera_shake(
 	duration: float = 0.2,
 	frequency: float = 15.0,
 	amplitude: int = 16,
