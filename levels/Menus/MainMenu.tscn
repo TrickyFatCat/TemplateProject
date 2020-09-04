@@ -11,3 +11,4 @@ script = ExtResource( 1 )
 position = Vector2( 189.547, 158.846 )
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
+hitpoints_max = null

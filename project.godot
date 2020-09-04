@@ -92,6 +92,7 @@ config/icon="res://icon.png"
 
 [autoload]
 
+Utility="*res://src/singletons/Utility.gd"
 Events="*res://src/singletons/Events.gd"
 LevelController="*res://src/singletons/LevelController.gd"
 GameSaver="*res://src/singletons/GameSaver.gd"

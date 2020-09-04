@@ -12,12 +12,12 @@ onready var stateMachine : StateMachine = $StateMachine
 
 
 func _on_DamageDetector_get_damage(damage: int) -> void:
-	Events.emit_signal("shake_camera")
 	hitPoints.decrease_value(damage)
-
-
+	
+	
 func _on_HitPoints_value_decreased() -> void:
 	Events.emit_signal("player_took_damage")
+	Events.emit_signal("shake_camera")
 	$AnimatedSprite.start_flash()
 
 
@@ -32,7 +32,6 @@ func _init() -> void:
 
 func _ready() -> void:
 	hitPoints.value_max = hitpoints_max
-	pass
 
 
 func set_is_active(value: bool) -> void:
