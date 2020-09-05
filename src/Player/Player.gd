@@ -35,7 +35,7 @@ func _ready() -> void:
 
 
 func set_is_active(value: bool) -> void:
-	is_active = value 
-	damageDetector.monitoring = value
-	damageDetector.monitorable = value
+	is_active = value
+	damageDetector.set_deffered("monitorable", value)
+	damageDetector.set_deffered("monitoring", value)
 	stateMachine.set_process_unhandled_input(value)

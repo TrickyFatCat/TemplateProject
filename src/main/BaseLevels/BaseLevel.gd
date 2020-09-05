@@ -1,18 +1,27 @@
 extends Node
 class_name BaseLevel
 
+const LOAD_DEALAY_TIME : float = 0.5
+const YSORT_NODE_NAME : String = "Objects"
 
-func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("shoot"):
-		var explosion_scene = load("res://src/main/BaseExplosion/BaseExplosion.tscn")
-		var explosion_instance = explosion_scene.instance()
-		GameManager.current_level.add_child(explosion_instance)
-		explosion_instance.position = get_viewport().get_mouse_position()
+var objects_node : YSort
 
 
 func _init() -> void:
 	GameManager.current_level = self
+	init()
 
 
 func _ready() -> void:
+	objects_node = get_node(YSORT_NODE_NAME)if has_node(YSORT_NODE_NAME) else null
+	ready()
+	yield(get_tree().create_timer(LOAD_DEALAY_TIME), "timeout")
 	Events.emit_signal("level_loaded")
+
+
+func init() -> void:
+	pass
+
+
+func ready() -> void:
+	pass
