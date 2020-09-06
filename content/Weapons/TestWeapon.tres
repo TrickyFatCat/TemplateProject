@@ -1,0 +1,13 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://src/main/BaseWeapon/WeaponParameters.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+weapon_name = "Test weapon"
+mode = 1
+bullet_type = 0
+damage = 1
+rate_of_fire = 1.0
+bullets = 1
+spread = 10.0

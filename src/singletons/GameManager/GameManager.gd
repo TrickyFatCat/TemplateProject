@@ -2,6 +2,7 @@ extends Node
 
 const LEVEL_NEXT : String = "next"
 const LEVEL_RESTART : String = "restart"
+const LEVEL_EXIT : String = "exit"
 const QUIT_GAME : String = "quit"
 
 var player : Player
@@ -34,6 +35,9 @@ func _process_transition_command() -> void:
 			pass
 		LEVEL_RESTART:
 			# TODO implement level restart
+			pass
+		LEVEL_EXIT:
+			# TODO implement exit to menu
 			pass
 		QUIT_GAME:
 			get_tree().quit()

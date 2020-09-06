@@ -12,10 +12,9 @@ func flip_weapon() -> void:
 
 
 func switch_z_index() -> void:
-	var abs_rotation = fmod(abs(rotation_degrees), 360.0)
+	var abs_rotation = fmod(rotation_degrees, 360.0)
 	
-	if abs_rotation > 180 and abs_rotation < 360:
+	if abs_rotation < 180:
 		z_index = 0
 	else:
 		z_index = -1
-	pass
