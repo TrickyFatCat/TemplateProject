@@ -68,6 +68,7 @@ func _start_level_restart() -> void:
 
 func _start_opening_screen() -> void:
 	TransitionScreen.start_transition()
+	pass
 
 
 func _apply_camera_shake(
