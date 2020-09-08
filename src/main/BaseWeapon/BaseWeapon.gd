@@ -18,12 +18,6 @@ onready var sprite : Sprite = $Sprite
 onready var sprite_init_pos : Vector2 = sprite.position
 
 
-func _unhandled_input(event: InputEvent) -> void:
-    if event.is_action_pressed("shoot"):
-        process_shoot()
-        # TODO Delete this test code
-
-
 func _process(delta: float) -> void:
     _recover_sprite_position()
 
