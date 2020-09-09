@@ -8,5 +8,5 @@
 script = ExtResource( 2 )
 
 [node name="Sprite" parent="." instance=ExtResource( 1 )]
-position = Vector2( 9, 0 )
+position = Vector2( 12, 1 )
 texture = ExtResource( 3 )
