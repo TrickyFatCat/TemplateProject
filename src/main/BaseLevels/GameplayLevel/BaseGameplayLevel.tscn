@@ -12,3 +12,5 @@ format = 1
 [node name="Objects" type="YSort" parent="."]
 
 [node name="Player" parent="Objects" instance=ExtResource( 2 )]
+
+[node name="Projectiles" type="Node" parent="Objects"]

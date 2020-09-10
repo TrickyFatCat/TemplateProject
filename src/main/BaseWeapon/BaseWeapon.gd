@@ -12,7 +12,7 @@ var mode : int
 var spawn_point : Vector2 = Vector2.ZERO
 var bullet_type : int
 var projectile_resource : String
-var projectile_scene : String
+var projectile_scene_path : String
 var damage : int
 var rate_of_fire : float
 var bullets_count : int
@@ -33,10 +33,9 @@ func _process(delta: float) -> void:
 
 func process_shoot() -> void:
 	# TODO Implement shooting logic
-	var projectile = load(projectile_scene)
-	var projectile_instance = projectile.instance()
-	add_child(projectile_instance)
-	projectile_instance.position = spawn_point
+	for _i in range(bullets_count):
+		_spawn_projectile()
+	
 	_apply_recoil()
 	emit_signal("shoot")
 	pass
@@ -57,9 +56,9 @@ func apply_parameters(parameters: WeaponParameters) -> void:
 		push_error("Projectile paramentrs hasn't been found in %s" % weapon_name)
 	
 	if parameters.projectile_scene_path:
-		projectile_scene = parameters.projectile_scene_path
+		projectile_scene_path = parameters.projectile_scene_path
 	else:
-		projectile_scene = PROJECTILE_DEFAULT
+		projectile_scene_path = PROJECTILE_DEFAULT
 		
 	damage = parameters.damage
 	rate_of_fire = parameters.rate_of_fire
@@ -72,9 +71,28 @@ func apply_parameters(parameters: WeaponParameters) -> void:
 	spread_decrease_shift = parameters.spread_decrease_shift
 
 
+func _spawn_projectile() -> void:
+	var projectile_scene := load(projectile_scene_path)
+	var projectile_instance = projectile_scene.instance()
+	var projectile_rotation = _calculate_procjectile_rotation()
+	var projectile_spawn_position := global_position + spawn_point.rotated(deg2rad(projectile_rotation))
+	var projectile_parameters := load(projectile_resource)
+	GameManager.current_level.objects_node.add_child(projectile_instance)
+	projectile_instance.global_position = projectile_spawn_position
+	projectile_instance.rotation_degrees = projectile_rotation
+	projectile_parameters.damage = damage
+	projectile_instance.apply_parameters(projectile_parameters)
+
+
 func _apply_recoil() -> void:
 	sprite.position.x -= RECOIL_POWER
 
 
 func _recover_sprite_position() -> void:
 	sprite.position = lerp(sprite.position, sprite_init_pos, RECOVERY_SPEED)
+
+
+func _calculate_procjectile_rotation() -> float:
+	randomize()
+	var sperad_noise = rand_range(-spread/2, spread/2)
+	return global_rotation_degrees + sperad_noise
