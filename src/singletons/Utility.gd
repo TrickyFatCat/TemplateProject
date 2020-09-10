@@ -2,7 +2,7 @@ extends Node
 
 
 static func get_facing_direction(target: Node2D) -> Vector2:
-	return Vector2.RIGHT.rotated(target.global_rotation)
+	return Vector2.RIGHT.rotated(target.rotation)
 
 
 static func get_player_position() -> Vector2:

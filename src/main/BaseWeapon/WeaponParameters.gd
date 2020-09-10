@@ -26,5 +26,5 @@ export(int) var bullets_count := 1
 export(bool) var is_spread_dynamic := false
 export(float) var spread_min := 10
 export(float) var spread_max := 10
-export(float) var spread_increase_shift := 10
-export(float) var spread_decrease_shift := 10
+export(float) var spread_increase_shift := 10.0
+export(float) var spread_decrease_shift := 10.0

@@ -25,16 +25,23 @@ var spread_decrease_shift : float
 
 onready var sprite : Sprite = $Sprite
 onready var sprite_init_pos : Vector2 = sprite.position
+ 
 
-
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	_recover_sprite_position()
+
+	if is_spread_dynamic and spread != spread_min:
+		_decrease_spread()
+		update()
 
 
 func process_shoot() -> void:
 	# TODO Implement shooting logic
 	for _i in range(bullets_count):
 		_spawn_projectile()
+
+	if is_spread_dynamic:
+		_increase_spread()
 	
 	_apply_recoil()
 	emit_signal("shoot")
@@ -96,3 +103,27 @@ func _calculate_procjectile_rotation() -> float:
 	randomize()
 	var sperad_noise = rand_range(-spread/2, spread/2)
 	return global_rotation_degrees + sperad_noise
+
+
+func _increase_spread() -> void:
+	spread += spread_increase_shift
+	spread = min(spread, spread_max)
+	print_debug(spread)
+
+
+func _decrease_spread() -> void:
+	spread -= spread_decrease_shift
+	spread = max(spread, spread_min)
+
+
+func _draw() -> void:
+	var debug_color = Color.aqua
+	var line_width = 3
+	var line_length = (Utility.get_facing_direction(self) * 1000)
+	var spread_threshhold = deg2rad(spread/2)
+	print_debug("Spread threshhold %s" % spread_threshhold)
+	var spawn_pos = global_position + spawn_point #.rotated(spread_threshhold)
+	var target_point_a = spawn_pos + line_length.rotated(spread_threshhold)
+	var target_point_b = spawn_pos + line_length.rotated(-spread_threshhold)
+	draw_line(spawn_pos, target_point_a, debug_color, line_width)
+	draw_line(spawn_pos, target_point_b, debug_color, line_width)
