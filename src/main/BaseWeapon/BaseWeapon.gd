@@ -25,6 +25,11 @@ var spread_decrease_shift : float
 
 onready var sprite : Sprite = $Sprite
 onready var sprite_init_pos : Vector2 = sprite.position
+onready var rofTimer : Timer = $RofTimer
+
+
+func _ready() -> void:
+	rofTimer.one_shot = true
  
 
 func _physics_process(delta: float) -> void:
@@ -36,7 +41,12 @@ func _physics_process(delta: float) -> void:
 
 
 func process_shoot() -> void:
-	# TODO Implement shooting logic
+	# TODO Implement shooting logic (projectile, raycast, beam)
+	# TODO Implement charge logic
+	# TODO Implement burst shooting
+	if not rofTimer.is_stopped():
+		return
+
 	for _i in range(bullets_count):
 		_spawn_projectile()
 
@@ -44,6 +54,7 @@ func process_shoot() -> void:
 		_increase_spread()
 	
 	_apply_recoil()
+	rofTimer.start()
 	emit_signal("shoot")
 	pass
 
@@ -69,6 +80,7 @@ func apply_parameters(parameters: WeaponParameters) -> void:
 		
 	damage = parameters.damage
 	rate_of_fire = parameters.rate_of_fire
+	rofTimer.wait_time = 1 / rate_of_fire
 	bullets_count = parameters.bullets_count
 	is_spread_dynamic = parameters.is_spread_dynamic
 	spread_min = parameters.spread_min
@@ -100,6 +112,7 @@ func _recover_sprite_position() -> void:
 
 
 func _calculate_procjectile_rotation() -> float:
+	# TODO add different types of spread (even and random)
 	randomize()
 	var sperad_noise = rand_range(-spread/2, spread/2)
 	return global_rotation_degrees + sperad_noise
@@ -121,7 +134,6 @@ func _draw() -> void:
 	var line_width = 3
 	var line_length = (Utility.get_facing_direction(self) * 1000)
 	var spread_threshhold = deg2rad(spread/2)
-	print_debug("Spread threshhold %s" % spread_threshhold)
 	var spawn_pos = global_position + spawn_point #.rotated(spread_threshhold)
 	var target_point_a = spawn_pos + line_length.rotated(spread_threshhold)
 	var target_point_b = spawn_pos + line_length.rotated(-spread_threshhold)

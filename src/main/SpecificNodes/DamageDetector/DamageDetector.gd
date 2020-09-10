@@ -12,8 +12,11 @@ func _on_area_entered(area: Area2D) -> void:
 
 
 func _on_body_entered(body: KinematicBody2D) -> void:
-	if body.is_damaging and not is_invulnerable:
+	if not is_invulnerable:
 		emit_signal("get_damage", body.damage)
+	
+	# TODO rethink destroying projectiles
+	body.queue_free()
 
 
 func get_damage(damage: int) -> void:

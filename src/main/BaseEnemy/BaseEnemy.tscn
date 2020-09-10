@@ -24,7 +24,7 @@ shape = SubResource( 1 )
 [node name="DamageDetector" parent="." instance=ExtResource( 1 )]
 position = Vector2( 0, -16 )
 collision_layer = 2147483650
-collision_mask = 48
+collision_mask = 40
 
 [node name="HitPoints" parent="." instance=ExtResource( 4 )]
 [connection signal="get_damage" from="DamageDetector" to="." method="_on_DamageDetector_get_damage"]

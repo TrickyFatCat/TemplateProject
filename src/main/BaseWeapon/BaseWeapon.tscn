@@ -10,3 +10,6 @@ script = ExtResource( 2 )
 [node name="Sprite" parent="." instance=ExtResource( 1 )]
 position = Vector2( 12, 1 )
 texture = ExtResource( 3 )
+
+[node name="RofTimer" type="Timer" parent="."]
+one_shot = true

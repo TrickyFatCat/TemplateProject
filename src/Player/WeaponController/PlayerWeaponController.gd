@@ -17,6 +17,8 @@ func _ready() -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("shoot"):
 		weapon.process_shoot()
+		# TODO Add auto and semiauto shoot logic
+		# TODO Add charge logic here
 
 	_process_weapon_switch_wheel(event) 
 
