@@ -6,6 +6,7 @@ var weapons := [
 ]
 
 var weapon_id : int = 0
+var is_shooting : bool = false
 
 onready var weapon : Weapon = $BaseWeapon
 
@@ -16,8 +17,10 @@ func _ready() -> void:
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("shoot"):
-		weapon.process_shoot()
-		# TODO Add auto and semiauto shoot logic
+		is_shooting = true
+
+	if event.is_action_released("shoot") and weapon.mode == WeaponParameters.shoot_mode.AUTO:
+		is_shooting = false
 		# TODO Add charge logic here
 
 	_process_weapon_switch_wheel(event) 
@@ -27,6 +30,14 @@ func _physics_process(delta: float) -> void:
 	look_at(get_global_mouse_position())
 	flip_weapon()
 	switch_z_index()
+
+
+func _process(delta: float) -> void:
+	if is_shooting:
+		weapon.process_shoot()
+
+		if weapon.mode == WeaponParameters.shoot_mode.SEMI_AUTO:
+			is_shooting = false
 
 
 func _switch_weapon(new_weapon_id: int) -> void:

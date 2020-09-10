@@ -13,3 +13,5 @@ texture = ExtResource( 3 )
 
 [node name="RofTimer" type="Timer" parent="."]
 one_shot = true
+
+[node name="ChargeTimer" type="Timer" parent="."]

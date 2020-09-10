@@ -16,6 +16,8 @@ var projectile_scene_path : String
 var damage : int
 var rate_of_fire : float
 var bullets_count : int
+
+#Spread params
 var is_spread_dynamic : bool
 var spread_min : float
 var spread_max : float
@@ -26,6 +28,7 @@ var spread_decrease_shift : float
 onready var sprite : Sprite = $Sprite
 onready var sprite_init_pos : Vector2 = sprite.position
 onready var rofTimer : Timer = $RofTimer
+onready var chargeTimer : Timer = $ChargeTimre
 
 
 func _ready() -> void:
@@ -41,7 +44,7 @@ func _physics_process(delta: float) -> void:
 
 
 func process_shoot() -> void:
-	# TODO Implement shooting logic (projectile, raycast, beam)
+	# TODO Implement shooting logic (raycast, beam)
 	# TODO Implement charge logic
 	# TODO Implement burst shooting
 	if not rofTimer.is_stopped():
@@ -121,7 +124,6 @@ func _calculate_procjectile_rotation() -> float:
 func _increase_spread() -> void:
 	spread += spread_increase_shift
 	spread = min(spread, spread_max)
-	print_debug(spread)
 
 
 func _decrease_spread() -> void:
