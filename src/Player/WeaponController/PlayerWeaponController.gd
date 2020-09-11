@@ -11,6 +11,10 @@ var is_shooting : bool = false
 onready var weapon : Weapon = $BaseWeapon
 
 
+func _on_Weapon_shoot():
+	Events.emit_signal("shake_camera")
+
+
 func _ready() -> void:
 	_switch_weapon(0)
 

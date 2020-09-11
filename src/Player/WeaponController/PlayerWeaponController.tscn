@@ -7,3 +7,4 @@
 script = ExtResource( 1 )
 
 [node name="BaseWeapon" parent="." instance=ExtResource( 2 )]
+[connection signal="shoot" from="BaseWeapon" to="." method="_on_Weapon_shoot"]
