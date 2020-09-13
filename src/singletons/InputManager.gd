@@ -5,12 +5,8 @@ enum input_device {
 	GAMEPAD
 }
 
-enum joy_analog{
-	LEFT,
-	RIGHT
-}
-
 const JOY_DEADZONE : float = 0.25
+const JOY_ID_DEFAULT : int = 0
 
 var current_input_device : int = input_device.KEYBOARD
 
@@ -20,11 +16,10 @@ func _unhandled_input(event: InputEvent) -> void:
 		current_input_device = input_device.KEYBOARD
 		Events.emit_signal("input_device_changed", current_input_device)
 		return
-		
+
 	if event is InputEventJoypadButton or event is InputEventJoypadMotion:
 		current_input_device = input_device.GAMEPAD
 		Events.emit_signal("input_device_changed", current_input_device)
-		# TODO Add checking gamepad index
 		return
 
 
@@ -43,5 +38,5 @@ static func get_joy_analog_direction(joy_index: int, axis_x: int, axis_y: int) -
 	return joy_direction
 
 
-static func get_analog_right_direction(joy_index: int) -> Vector2:
+static func get_analog_right_direction(joy_index: int = JOY_ID_DEFAULT) -> Vector2:
 	return get_joy_analog_direction(joy_index, JOY_ANALOG_RX, JOY_ANALOG_RY)

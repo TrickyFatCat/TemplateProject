@@ -1,7 +1,7 @@
 extends Position2D
 class_name PlayerCamera
 
-const CAMERA_FOLLOW_SPEED : float = 0.3
+const CAMERA_FOLLOW_SPEED : float = 0.1
 
 onready var camera: Camera2D = $PlayerCamera
 onready var cameraShaker := $PlayerCamera/CameraShaker
@@ -34,10 +34,11 @@ func _update_position(velocity: Vector2 = Vector2.ZERO) -> void:
 			target_position = distance_ratio * mouse_position.normalized() * offset
 			pass
 		InputManager.input_device.GAMEPAD:
-			distance_ratio = InputManager.get_analog_right_direction(0).length()
-			target_position = distance_ratio * InputManager.get_analog_right_direction(0) * offset
+			if InputManager.get_analog_right_direction() != Vector2.ZERO:
+				distance_ratio = InputManager.get_analog_right_direction().length()
+				target_position = distance_ratio * InputManager.get_analog_right_direction() * offset
 			pass
-
+		
 	camera.position = lerp(camera.position, target_position, CAMERA_FOLLOW_SPEED)
 
 
