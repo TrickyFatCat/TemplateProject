@@ -29,3 +29,4 @@ signal game_loaded()
 # Other signals
 signal shake_camera(duration, frequency, amplitude, priority)
 signal quit_game()
+signal input_device_changed(device_index)

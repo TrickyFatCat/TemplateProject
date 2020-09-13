@@ -31,7 +31,15 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func _physics_process(delta: float) -> void:
-	look_at(get_global_mouse_position())
+	match InputManager.current_input_device:
+		InputManager.input_device.KEYBOARD:
+			look_at(get_global_mouse_position())
+			pass
+		InputManager.input_device.GAMEPAD:
+			if InputManager.get_analog_right_direction(0) != Vector2.ZERO:
+				rotation = _get_joystick_rotation()
+			pass
+	
 	flip_weapon()
 	switch_z_index()
 
@@ -69,3 +77,7 @@ func _process_weapon_switch_wheel(event: InputEvent) -> void:
 			weapon_id = weapons.size() - 1
 		
 		_switch_weapon(weapon_id)
+
+
+func _get_joystick_rotation() -> float:
+	return InputManager.get_analog_right_direction(0).angle()

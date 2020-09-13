@@ -28,7 +28,7 @@ var spread_decrease_shift : float
 onready var sprite : Sprite = $Sprite
 onready var sprite_init_pos : Vector2 = sprite.position
 onready var rofTimer : Timer = $RofTimer
-onready var chargeTimer : Timer = $ChargeTimre
+onready var chargeTimer : Timer = $ChargeTimer
 
 
 func _ready() -> void:
