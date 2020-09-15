@@ -34,9 +34,10 @@ func _update_position(velocity: Vector2 = Vector2.ZERO) -> void:
 			target_position = distance_ratio * mouse_position.normalized() * offset
 			pass
 		InputManager.input_device.GAMEPAD:
-			if InputManager.get_analog_right_direction() != Vector2.ZERO:
-				distance_ratio = InputManager.get_analog_right_direction().length()
-				target_position = distance_ratio * InputManager.get_analog_right_direction() * offset
+			var joy_direction = InputManager.get_analog_right_direction(InputManager.joy_id_current)
+			if joy_direction != Vector2.ZERO:
+				distance_ratio = joy_direction.length()
+				target_position = distance_ratio * joy_direction * offset
 			pass
 		
 	camera.position = lerp(camera.position, target_position, CAMERA_FOLLOW_SPEED)

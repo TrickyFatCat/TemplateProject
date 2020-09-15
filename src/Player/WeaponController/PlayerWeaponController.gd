@@ -36,7 +36,7 @@ func _physics_process(delta: float) -> void:
 			look_at(get_global_mouse_position())
 			pass
 		InputManager.input_device.GAMEPAD:
-			if InputManager.get_analog_right_direction() != Vector2.ZERO:
+			if InputManager.get_analog_right_direction(InputManager.joy_id_current) != Vector2.ZERO:
 				rotation = _get_joystick_rotation()
 			pass
 	
@@ -80,4 +80,4 @@ func _process_weapon_switch_wheel(event: InputEvent) -> void:
 
 
 func _get_joystick_rotation() -> float:
-	return InputManager.get_analog_right_direction().angle()
+	return InputManager.get_analog_right_direction(InputManager.joy_id_current).angle()

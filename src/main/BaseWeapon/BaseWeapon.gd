@@ -17,7 +17,7 @@ var damage : int
 var rate_of_fire : float
 var bullets_count : int
 
-#Spread params
+# Spread params
 var is_spread_dynamic : bool
 var spread_min : float
 var spread_max : float
@@ -102,6 +102,7 @@ func _spawn_projectile() -> void:
 	GameManager.current_level.objects_node.add_child(projectile_instance)
 	projectile_instance.global_position = projectile_spawn_position
 	projectile_instance.rotation_degrees = projectile_rotation
+	projectile_instance.direction = Vector2.RIGHT.rotated(projectile_instance.rotation)
 	projectile_parameters.damage = damage
 	projectile_instance.apply_parameters(projectile_parameters)
 
@@ -117,7 +118,7 @@ func _recover_sprite_position() -> void:
 func _calculate_procjectile_rotation() -> float:
 	# TODO add different types of spread (even and random)
 	randomize()
-	var sperad_noise = rand_range(-spread/2, spread/2)
+	var sperad_noise = rand_range(-spread / 2, spread / 2)
 	return global_rotation_degrees + sperad_noise
 
 
@@ -135,7 +136,7 @@ func _draw() -> void:
 	var debug_color = Color.aqua
 	var line_width = 3
 	var line_length = (Utility.get_facing_direction(self) * 1000)
-	var spread_threshhold = deg2rad(spread/2)
+	var spread_threshhold = deg2rad(spread / 2)
 	var spawn_pos = global_position + spawn_point #.rotated(spread_threshhold)
 	var target_point_a = spawn_pos + line_length.rotated(spread_threshhold)
 	var target_point_b = spawn_pos + line_length.rotated(-spread_threshhold)

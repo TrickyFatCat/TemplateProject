@@ -40,5 +40,5 @@ static func get_joy_analog_direction(joy_index: int, axis_x: int, axis_y: int) -
 	return joy_direction
 
 
-func get_analog_right_direction(joy_index: int = joy_id_current) -> Vector2:
+static func get_analog_right_direction(joy_index: int = JOY_ID_DEFAULT) -> Vector2:
 	return get_joy_analog_direction(joy_index, JOY_ANALOG_RX, JOY_ANALOG_RY)
