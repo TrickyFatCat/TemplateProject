@@ -15,12 +15,14 @@ var joy_id_current : int = JOY_ID_DEFAULT
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventKey or event is InputEventMouse:
 		current_input_device = input_device.KEYBOARD
+		Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED)
 		Events.emit_signal("input_device_changed", current_input_device)
 		return
 
 	if event is InputEventJoypadButton or event is InputEventJoypadMotion:
 		joy_id_current = event.device
 		current_input_device = input_device.GAMEPAD
+		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 		Events.emit_signal("input_device_changed", current_input_device)
 		return
 
