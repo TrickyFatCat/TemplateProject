@@ -12,18 +12,18 @@ const VALUE_MIN : int = 0
 export(int) var value_start := 0 setget set_value_start
 export(int) var value_max := 0 setget set_value_max
 
-var value_current : int = 0
+var value : int = 0
 
 
 func _inint() -> void:
-    value_current = value_max if value_start <= 0 else value_start
+    value = value_max if value_start <= 0 else value_start
 
 
 func decrease_value(amount: int) -> void:
-    value_current -= amount
-    value_current = int(max(value_current, VALUE_MIN))
+    value -= amount
+    value = int(max(value, VALUE_MIN))
 
-    if value_current > 0:
+    if value > 0:
         emit_signal("value_decreased")
     else:
         emit_signal("value_zero")
@@ -36,18 +36,18 @@ func decrease_max_value(amount: int) -> void:
     if value_max > 0:
         emit_signal("value_max_decreased")
     else:
-        value_current = value_max
+        value = value_max
         emit_signal("value_zero")
 
 
 func increase_value_limited(amount: int) -> void:
-    value_current += amount
-    value_current = int(min(value_current, value_max))
+    value += amount
+    value = int(min(value, value_max))
     emit_signal("value_increased")
 
 
 func increase_value(amount: int) -> void:
-    value_current += amount
+    value += amount
     emit_signal("value_increased")
 
 
@@ -60,11 +60,11 @@ func set_value_start(value: int) -> void:
     value_start = value
 
     if value_start > 0:
-        value_current = value_start
+        value = value_start
 
 
 func set_value_max(value: int) -> void:
     value_max = value
     
     if value_start <= 0:
-        value_current = value_max
+        value = value_max

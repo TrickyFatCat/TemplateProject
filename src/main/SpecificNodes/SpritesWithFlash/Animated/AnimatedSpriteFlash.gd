@@ -1,4 +1,5 @@
 extends AnimatedSprite
+class_name FlashingAnimatedSprite
 
 signal flash_finished()
 

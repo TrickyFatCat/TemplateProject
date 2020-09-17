@@ -18,6 +18,7 @@ void fragment()
 custom_defines = ""
 
 [sub_resource type="ShaderMaterial" id=2]
+resource_local_to_scene = true
 shader = SubResource( 1 )
 shader_param/u_alpha = 0.0
 shader_param/u_colour = Color( 1, 0, 0, 1 )

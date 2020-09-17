@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://src/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://src/singletons/PlayerCamera/PlayerCamera.tscn" type="PackedScene" id=2]
@@ -9,8 +9,28 @@
 [ext_resource path="res://src/main/BaseResources/HitPoints/HitPoints.tscn" type="PackedScene" id=7]
 [ext_resource path="res://src/main/SpecificNodes/DamageDetector/DamageDetector.tscn" type="PackedScene" id=8]
 [ext_resource path="res://src/Player/WeaponController/PlayerWeaponController.tscn" type="PackedScene" id=9]
+[ext_resource path="res://src/Player/StateMachine/PlayerMove.gd" type="Script" id=10]
 
-[sub_resource type="RectangleShape2D" id=1]
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+
+uniform float u_alpha : hint_range(0.0, 1.0) = 0.0;
+uniform vec4 u_colour: hint_color = vec4(1.0);
+
+void fragment()
+{
+	vec4 texture_colour = texture(TEXTURE, UV);
+	COLOR.rbg = texture_colour.rbg * (1.0 - u_alpha) + u_colour.rbg * u_alpha;
+	COLOR.a = texture_colour.a;
+}"
+custom_defines = ""
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
+shader_param/u_alpha = 0.0
+shader_param/u_colour = Color( 1, 0, 0, 1 )
+
+[sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 9, 9 )
 
 [node name="Player" type="KinematicBody2D"]
@@ -19,6 +39,7 @@ collision_mask = 4
 script = ExtResource( 1 )
 
 [node name="AnimatedSprite" parent="." instance=ExtResource( 4 )]
+material = SubResource( 2 )
 position = Vector2( 0, -27 )
 frames = ExtResource( 3 )
 
@@ -27,7 +48,7 @@ position = Vector2( 0, -24 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -15 )
-shape = SubResource( 1 )
+shape = SubResource( 3 )
 
 [node name="CameraRig" parent="." instance=ExtResource( 2 )]
 
@@ -49,7 +70,7 @@ script = ExtResource( 6 )
 script = ExtResource( 6 )
 
 [node name="Move" type="Node" parent="StateMachine"]
-script = ExtResource( 6 )
+script = ExtResource( 10 )
 
 [node name="Idle" type="Node" parent="StateMachine/Move"]
 script = ExtResource( 6 )
@@ -65,6 +86,3 @@ script = ExtResource( 6 )
 
 [node name="Death" type="Node" parent="StateMachine"]
 script = ExtResource( 6 )
-[connection signal="get_damage" from="DamageDetector" to="." method="_on_DamageDetector_get_damage"]
-[connection signal="value_decreased" from="HitPoints" to="." method="_on_HitPoints_value_decreased"]
-[connection signal="value_zero" from="HitPoints" to="." method="_on_HitPoints_value_zero"]

@@ -1,9 +1,5 @@
 extends Entity
-class_name Player
-
-
-func _init() -> void:
-	GameManager.player = self
+class_name Enemy
 
 
 func ready() -> void:
@@ -17,14 +13,13 @@ func on_get_damage(damage: int) -> void:
 
 
 func on_hitpoints_decreased() -> void:
-	Events.emit_signal("player_took_damage")
-	Events.emit_signal("shake_camera")
 	sprite.start_flash()
 	pass
 
 
 func on_zero_hitpoints() -> void:
 	# TODO add logic on zero hitpoints
-	Events.emit_signal("player_dead")
-	self.is_active = false
+	# TODO rework this code
+	# self.is_active = false
+	queue_free()
 	pass
