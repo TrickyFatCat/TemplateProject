@@ -23,7 +23,6 @@ void fragment()
 	COLOR.rbg = texture_colour.rbg * (1.0 - u_alpha) + u_colour.rbg * u_alpha;
 	COLOR.a = texture_colour.a;
 }"
-custom_defines = ""
 
 [sub_resource type="ShaderMaterial" id=2]
 shader = SubResource( 1 )

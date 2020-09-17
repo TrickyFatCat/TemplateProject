@@ -29,3 +29,4 @@ static func approachi(value_initial: int, value_target: int, shift: int) -> int:
         return int(min(value_initial + shift, value_target))
     else:
         return int(max(value_initial - shift, value_target))
+

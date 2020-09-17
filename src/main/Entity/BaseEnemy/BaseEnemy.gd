@@ -13,7 +13,7 @@ func on_get_damage(damage: int) -> void:
 
 
 func on_hitpoints_decreased() -> void:
-	sprite.start_flash()
+	sprite.start_flash(true)
 	pass
 
 
