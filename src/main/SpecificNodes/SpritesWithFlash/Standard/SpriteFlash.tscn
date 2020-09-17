@@ -17,8 +17,9 @@ void fragment()
 }"
 
 [sub_resource type="ShaderMaterial" id=2]
+resource_local_to_scene = true
 shader = SubResource( 1 )
-shader_param/u_alpha = 1.02327
+shader_param/u_alpha = 0.0
 shader_param/u_colour = Color( 1, 0, 0, 1 )
 
 [node name="Sprite" type="Sprite"]

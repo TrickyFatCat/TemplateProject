@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://src/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://src/singletons/PlayerCamera/PlayerCamera.tscn" type="PackedScene" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://src/main/SpecificNodes/DamageDetector/DamageDetector.tscn" type="PackedScene" id=8]
 [ext_resource path="res://src/Player/WeaponController/PlayerWeaponController.tscn" type="PackedScene" id=9]
 [ext_resource path="res://src/Player/StateMachine/PlayerMove.gd" type="Script" id=10]
+[ext_resource path="res://src/Player/Scent/ScentSpawner.tscn" type="PackedScene" id=11]
 
 [sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
@@ -60,7 +61,7 @@ collision_mask = 48
 
 [node name="StateMachine" type="Node" parent="."]
 script = ExtResource( 5 )
-initial_state = NodePath("Inactive")
+initial_state = NodePath("Move")
 
 [node name="Inactive" type="Node" parent="StateMachine"]
 script = ExtResource( 6 )
@@ -85,3 +86,5 @@ script = ExtResource( 6 )
 
 [node name="Death" type="Node" parent="StateMachine"]
 script = ExtResource( 6 )
+
+[node name="ScentSpawner" parent="." instance=ExtResource( 11 )]

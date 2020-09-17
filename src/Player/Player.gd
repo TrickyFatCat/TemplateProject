@@ -28,3 +28,7 @@ func on_zero_hitpoints() -> void:
 	Events.emit_signal("player_dead")
 	self.is_active = false
 	pass
+
+
+func get_scent_trail() -> Array:
+	return $ScentSpawner.scent_trail

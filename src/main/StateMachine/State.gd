@@ -2,6 +2,7 @@ extends Node
 class_name State, "res://assets/EngineIcons/icon_state.svg"
 
 onready var stateMachine: Node = _get_state_machine(self)
+# var stateMachine : StateMachine
 
 
 # warning-ignore:unused_argument

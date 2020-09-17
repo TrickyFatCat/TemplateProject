@@ -1,6 +1,8 @@
 extends Entity
 class_name Enemy
 
+var target
+
 
 func ready() -> void:
 	# TODO add ready logic for the player character

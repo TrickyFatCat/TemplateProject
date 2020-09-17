@@ -6,6 +6,7 @@ var friction : float = 0.0
 
 onready var sprite : AnimatedSprite = get_parent().get_parent().get_node("AnimatedSprite")
 
+
 func _ready() -> void:
 	pass
 
@@ -16,6 +17,14 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func _physics_process(delta: float) -> void:
 	pass
+
+
+func enter(msg: Dictionary = {}) -> void:
+	return
+
+
+func exit() -> void:
+	return
 
 
 func calculate_move_direction() -> Vector2:

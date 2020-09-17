@@ -12,7 +12,6 @@ func _ready() -> void:
 	flashController.flash_duration_time = flash_duration_time
 	flashController.connect("flash_finished", self, "emit_flash_finished")
 
-
 func start_flash(flash_once: bool) -> void:
 	flashController.start_flash(flash_once)
 
