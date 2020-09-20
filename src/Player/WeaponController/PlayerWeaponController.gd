@@ -1,8 +1,8 @@
 extends WeaponController
 
-var weapons := [
-	load("res://content/Weapons/TestWeapon0.tres"),
-	load("res://content/Weapons/TestWeapon1.tres")
+const WEAPONS := [
+	preload("res://content/Weapons/TestWeapon0.tres"),
+	preload("res://content/Weapons/TestWeapon1.tres")
 ]
 
 var weapon_id : int = 0
@@ -23,7 +23,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("shoot"):
 		is_shooting = true
 
-	if event.is_action_released("shoot") and weapon.mode == WeaponParameters.shoot_mode.AUTO:
+	if event.is_action_released("shoot") and weapon.mode == Weapon.shoot_mode.AUTO:
 		is_shooting = false
 		# TODO Add charge logic here
 
@@ -48,24 +48,24 @@ func _process(delta: float) -> void:
 	if is_shooting:
 		weapon.process_shoot()
 
-		if weapon.mode == WeaponParameters.shoot_mode.SEMI_AUTO:
+		if weapon.mode == Weapon.shoot_mode.SEMI_AUTO:
 			is_shooting = false
 
 
 func _switch_weapon(new_weapon_id: int) -> void:
-	if new_weapon_id < 0 or new_weapon_id > weapons.size() - 1:
+	if new_weapon_id < 0 or new_weapon_id > WEAPONS.size() - 1:
 		var error_text := "A weapon with id %s hasn't been found." % new_weapon_id
 		push_error(error_text)
 		return
 	
-	weapon.apply_parameters(weapons[new_weapon_id])
+	weapon.apply_parameters(WEAPONS[new_weapon_id])
 
 
 func _process_weapon_switch_wheel(event: InputEvent) -> void:
 	if event.is_action_pressed("choose_weapon_next"):
 		weapon_id += 1
 		
-		if weapon_id == weapons.size():
+		if weapon_id == WEAPONS.size():
 			weapon_id = 0
 		
 		_switch_weapon(weapon_id)
@@ -74,7 +74,7 @@ func _process_weapon_switch_wheel(event: InputEvent) -> void:
 		weapon_id -= 1
 
 		if weapon_id < 0:
-			weapon_id = weapons.size() - 1
+			weapon_id = WEAPONS.size() - 1
 		
 		_switch_weapon(weapon_id)
 

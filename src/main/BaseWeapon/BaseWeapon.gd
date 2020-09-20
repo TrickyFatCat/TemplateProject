@@ -3,6 +3,17 @@ class_name Weapon
 
 signal shoot()
 
+enum shoot_mode{
+	AUTO,
+	SEMI_AUTO
+}
+
+enum bullet{
+	PROJECTILE,
+	RAYCAST,
+	BEAM
+}
+
 const RECOIL_POWER : float = 25.0
 const RECOVERY_SPEED : float = 0.2
 const PROJECTILE_DEFAULT : String = "res://src/main/BaseProjectile/BaseProjectile.tscn"
@@ -68,7 +79,7 @@ func apply_parameters(parameters: WeaponParameters) -> void:
 	sprite.position = parameters.sprite_offset
 	sprite_init_pos = parameters.sprite_offset
 	spawn_point.x = parameters.spawn_offset_x
-	mode = parameters.mode
+	mode = parameters.shoot_mode
 	bullet_type = parameters.bullet_type
 	
 	if parameters.projectile_resource:
