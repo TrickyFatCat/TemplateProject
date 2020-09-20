@@ -31,12 +31,14 @@ func _ready() -> void:
 func _process_transition_command() -> void:
 	match transition_command:
 		LEVEL_NEXT:
+			LevelController.load_next_level()
 			# TODO implement level loading by ID
 			pass
 		LEVEL_RESTART:
 			# TODO implement level restart
 			pass
 		LEVEL_EXIT:
+			LevelController.load_main_menu()
 			# TODO implement exit to menu
 			pass
 		QUIT_GAME:

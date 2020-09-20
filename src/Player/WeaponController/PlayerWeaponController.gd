@@ -90,7 +90,7 @@ func set_ammo_max(ammo_id: int, new_max: int) -> void:
 func _process_shoot() -> void:
 	decrease_ammo_current(ammo_id_current, ammo_cost_current)
 	Events.emit_signal("shake_camera")
-	Events.emit_signal("player_shoot")
+	Events.emit_signal("player_shoot", ammo_id_current, get_ammo_current(ammo_id_current))
 
 
 func _switch_weapon(new_weapon_id: int) -> void:
@@ -105,7 +105,7 @@ func _switch_weapon(new_weapon_id: int) -> void:
 func _process_switch() -> void:
 	ammo_id_current = weapon.ammo_id
 	ammo_cost_current = weapon.ammo_cost
-	Events.emit_signal("player_switched_weapon")
+	Events.emit_signal("player_switched_weapon", ammo_id_current, get_ammo_current(ammo_id_current), get_ammo_max(ammo_id_current))
 
 
 func _process_weapon_switch_wheel(event: InputEvent) -> void:
