@@ -18,4 +18,3 @@ texture = ExtResource( 2 )
 shape = SubResource( 1 )
 
 [node name="LifeSpanTimer" parent="." instance=ExtResource( 3 )]
-wait_time = 140.252

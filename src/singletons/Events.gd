@@ -12,6 +12,8 @@ signal level_exit()
 signal player_spawned()
 signal player_took_damage()
 signal player_dead()
+signal player_shoot()
+signal player_switched_weapon()
 
 # Hud signals
 # TODO Add HUD signals here

@@ -4,4 +4,3 @@
 
 [node name="LifeSpanTimer" type="Timer"]
 script = ExtResource( 1 )
-[connection signal="timeout" from="." to="." method="_on_timeout"]
