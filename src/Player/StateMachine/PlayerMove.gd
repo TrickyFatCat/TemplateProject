@@ -8,21 +8,18 @@ var velocity_max : float = 400.0
 var acceleration : float = 2500.0
 var friction : float = 2500.0
 
-onready var sprite : AnimatedSprite = get_parent().get_parent().get_node("AnimatedSprite")
-
 
 func _ready() -> void:
 	pass
 
 
-func _unhandled_input(event: InputEvent) -> void:
+func unhandled_input(event: InputEvent) -> void:
 	pass
 
 
-func _physics_process(delta: float) -> void:
+func physics_process(delta: float) -> void:
 	_calculate_move_direction()
-	calculate_velocity_y(delta, move_direction)
-	calculate_velocity_x(delta, move_direction)
+	_calculate_velocity(delta, move_direction)
 	velocity = owner.move_and_slide(velocity)
 
 
@@ -40,29 +37,26 @@ func _calculate_move_direction() -> void:
 	move_direction.normalized()
 
 
-func calculate_velocity_x(delta: float, direction: Vector2) -> void:
-	if direction.x != 0 and abs(velocity.x) <= velocity_max:
-		velocity.x += acceleration * direction.x * delta
-		velocity.x = clamp(velocity.x, -velocity_max, velocity_max)
-	elif velocity.x != 0 or abs(velocity.x) > velocity_max:
-		var friction_direction = -sign(velocity.x)
-		velocity.x += friction * friction_direction * delta
-		
-		if friction_direction < 0:
-			velocity.x = max(velocity.x, 0)
-		elif friction_direction > 0:
-			velocity.x = min(velocity.x, 0)
+func _calculate_velocity(delta: float, direction: Vector2) -> void:
+	if direction != Vector2.ZERO and (abs(velocity.x) <= velocity_max or abs(velocity.y) <= velocity_max):
+		velocity += Vector2(acceleration, acceleration) * direction * delta
+		velocity.x = _clamp_velocity(velocity.x)
+		velocity.y = _clamp_velocity(velocity.y)
+	elif velocity != Vector2.ZERO or (abs(velocity.x) > velocity_max or abs(velocity.y) > velocity_max):
+		var friction_direction := velocity.normalized() * -1
+		velocity += friction * friction_direction * delta
+		velocity.x = _limit_velocity(velocity.x, friction_direction.x)
+		velocity.y = _limit_velocity(velocity.y, friction_direction.y)
 
 
-func calculate_velocity_y(delta: float, direction: Vector2) -> void:
-	if direction.y != 0 and abs(velocity.y) <= velocity_max:
-		velocity.y += acceleration * direction.y * delta
-		velocity.y = clamp(velocity.y, -velocity_max, velocity_max)
-	elif velocity.y != 0 or abs(velocity.y) > velocity_max:
-		var friction_direction = -sign(velocity.y)
-		velocity.y += friction * friction_direction * delta
+func _clamp_velocity(velocity_axis: float) -> float:
+	return clamp(velocity_axis, -velocity_max, velocity_max)
+
 		
-		if friction_direction < 0:
-			velocity.y = max(velocity.y, 0)
-		elif friction_direction > 0:
-			velocity.y = min(velocity.y, 0)
+func _limit_velocity(velocity_axis: float, direction_axis: float) -> float:
+	if direction_axis < 0:
+		velocity_axis = max(velocity_axis, 0)
+	elif direction_axis > 0:
+		velocity_axis = min(velocity_axis, 0)
+
+	return velocity_axis

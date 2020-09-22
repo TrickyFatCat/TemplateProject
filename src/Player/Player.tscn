@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://src/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://src/singletons/PlayerCamera/PlayerCamera.tscn" type="PackedScene" id=2]
@@ -12,6 +12,7 @@
 [ext_resource path="res://src/Player/StateMachine/PlayerMove.gd" type="Script" id=10]
 [ext_resource path="res://src/Player/Scent/ScentSpawner.tscn" type="PackedScene" id=11]
 [ext_resource path="res://src/Player/StateMachine/PlayerRun.gd" type="Script" id=12]
+[ext_resource path="res://src/Player/StateMachine/PlayerIdle.gd" type="Script" id=13]
 
 [sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
@@ -62,7 +63,7 @@ collision_mask = 48
 
 [node name="StateMachine" type="Node" parent="."]
 script = ExtResource( 5 )
-initial_state = NodePath("Move/Run")
+initial_state = NodePath("Move/Idle")
 
 [node name="Inactive" type="Node" parent="StateMachine"]
 script = ExtResource( 6 )
@@ -74,7 +75,7 @@ script = ExtResource( 6 )
 script = ExtResource( 10 )
 
 [node name="Idle" type="Node" parent="StateMachine/Move"]
-script = ExtResource( 6 )
+script = ExtResource( 13 )
 
 [node name="Run" type="Node" parent="StateMachine/Move"]
 script = ExtResource( 12 )
