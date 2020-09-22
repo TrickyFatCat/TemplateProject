@@ -1,6 +1,8 @@
 extends Node2D
 class_name WeaponController
 
+var is_active : bool = true setget _set_is_active
+
 
 func flip_weapon() -> void:
 	var abs_rotation = fmod(abs(rotation_degrees), 360.0)
@@ -18,3 +20,10 @@ func switch_z_index() -> void:
 		z_index = 0
 	else:
 		z_index = -1
+
+
+func _set_is_active(value: bool) -> void:
+	is_active = value
+	set_process_unhandled_input(value)
+	set_physics_process(value)
+	set_process(value)

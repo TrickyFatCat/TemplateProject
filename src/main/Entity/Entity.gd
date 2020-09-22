@@ -9,6 +9,7 @@ export(float) var friction := 2500
 
 var is_invulnerable : bool = false
 var is_active : bool = true setget set_is_active
+var weaponController : WeaponController
 
 onready var hitPoints : HitPoints = $HitPoints
 onready var damageDetector : DamageDetector = $DamageDetector
@@ -25,9 +26,21 @@ func _ready() -> void:
 	
 func set_is_active(value: bool) -> void:
 	is_active = value
-	damageDetector.set_deffered("monitorable", value)
-	damageDetector.set_deffered("monitoring", value)
+	sprite.visible = value
+	damageDetector.monitoring = value
+	damageDetector.monitorable = value
 	stateMachine.set_process_unhandled_input(value)
+	switch_logic(value)
+	
+	if weaponController:
+		weaponController.is_active = value
+		weaponController.visible = false
+
+
+
+func switch_logic(value: bool) -> void:
+	# Add any logic for set_is_active
+	pass
 
 
 func ready() -> void:
@@ -64,6 +77,11 @@ func _connect_signals() -> void:
 func _apply_parameters() -> void:
 	hitPoints.value_max = hitpoints_max
 	hitPoints.value = hitpoints_initial
+
+	if has_node("WeaponController"):
+		weaponController = get_node("WeaponController")
+	else:
+		push_warning("Entity >> %s << doesn't have a WeaponController node, if it must have one, check its scene" % name)
 
 
 func _decrease_hitpoints(damage: int) -> void:

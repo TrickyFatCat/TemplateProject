@@ -9,8 +9,6 @@ onready var cameraShaker := $PlayerCamera/CameraShaker
 export var offset: = Vector2(200.0, 200.0)
 export var camera_range: = Vector2(0.0, 400.0)
 
-var is_active: = true
-
 
 func _init() -> void:
 	GameManager.playerCamera = self
@@ -21,9 +19,6 @@ func _physics_process(delta: float) -> void:
 
 
 func _update_position(velocity: Vector2 = Vector2.ZERO) -> void:
-	if not is_active:
-		return
-	
 	var distance_ratio : float
 	var target_position : Vector2
 

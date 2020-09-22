@@ -4,10 +4,6 @@ extends MoveState
 # TODO make these parameter applyable from the owner
 
 
-func _ready() -> void:
-	pass
-
-
 func unhandled_input(event: InputEvent) -> void:
 	pass
 

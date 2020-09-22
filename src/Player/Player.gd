@@ -6,6 +6,10 @@ func _init() -> void:
 	GameManager.player = self
 
 
+func switch_logic(value: bool) -> void:
+	$CameraRig.set_physics_process(value)
+
+
 func ready() -> void:
 	# TODO add ready logic for the player character
 	pass
