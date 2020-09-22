@@ -3,8 +3,9 @@ class_name Entity
 
 export(int) var hitpoints_max := 100
 export(int) var hitpoints_initial := 100
-export(float) var velocity_max := 200
-export(float) var acceleration := 100
+export(float) var velocity_max := 400
+export(float) var acceleration := 2500
+export(float) var friction := 2500
 
 var is_invulnerable : bool = false
 var is_active : bool = true setget set_is_active
@@ -21,7 +22,7 @@ func _ready() -> void:
 	ready()
 	pass
 
-
+	
 func set_is_active(value: bool) -> void:
 	is_active = value
 	damageDetector.set_deffered("monitorable", value)
