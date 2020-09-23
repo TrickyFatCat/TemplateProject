@@ -7,7 +7,7 @@ export(float) var velocity_max := 400
 export(float) var acceleration := 2500
 export(float) var friction := 2500
 
-var is_invulnerable : bool = false
+var is_invulnerable : bool = false setget set_is_invulnerable
 var is_active : bool = true setget set_is_active
 var weaponController : WeaponController
 
@@ -17,18 +17,10 @@ onready var stateMachine : StateMachine = $StateMachine
 onready var sprite : FlashingAnimatedSprite = $AnimatedSprite
 
 
-func _ready() -> void:
-	_connect_signals()
-	_apply_parameters()
-	ready()
-	pass
-
-	
 func set_is_active(value: bool) -> void:
 	is_active = value
 	sprite.visible = value
-	damageDetector.monitoring = value
-	damageDetector.monitorable = value
+	damageDetector.is_active = value
 	stateMachine.set_process_unhandled_input(value)
 	switch_logic(value)
 	
@@ -40,6 +32,26 @@ func set_is_active(value: bool) -> void:
 
 func switch_logic(value: bool) -> void:
 	# Add any logic for set_is_active
+	pass
+
+
+func set_is_invulnerable(value: bool) -> void:
+	is_invulnerable = value
+	damageDetector.is_invulnerable = value
+
+
+func activate_damage_detection() -> void:
+	damageDetector.is_active = true
+
+
+func deactivate_damage_detection() -> void:
+	damageDetector.is_active = false
+
+
+func _ready() -> void:
+	_connect_signals()
+	_apply_parameters()
+	ready()
 	pass
 
 

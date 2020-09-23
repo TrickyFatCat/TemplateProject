@@ -14,6 +14,12 @@ func _ready() -> void:
 	velocity_max = owner.velocity_max
 	acceleration = owner.acceleration
 	friction = owner.friction
+	apply_parameters_on_ready()
+
+
+func apply_parameters_on_ready() -> void:
+	# Write any additional logic here
+	pass
 
 
 func _calculate_velocity(delta: float, direction: Vector2) -> void:
@@ -41,5 +47,5 @@ func _limit_velocity(velocity_axis: float, direction_axis: float) -> float:
 	return velocity_axis
 
 
-func _apply_movemnt() -> void:
+func _apply_movement() -> void:
 	velocity = owner.move_and_slide(velocity) 

@@ -1,6 +1,8 @@
 extends Entity
 class_name Player
 
+export(float) var dash_velocity := 700
+
 
 func _init() -> void:
 	GameManager.player = self
