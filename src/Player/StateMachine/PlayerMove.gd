@@ -1,7 +1,5 @@
-extends MoveState
+extends EntityMove
 
-# TODO make base movement state for all entities
-# TODO make these parameter applyable from the owner
 var dash_velocity : Vector2
 
 

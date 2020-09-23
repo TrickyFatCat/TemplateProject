@@ -1,3 +1,5 @@
+#* Base state class. Inherit all new states from this class
+
 extends Node
 class_name State, "res://assets/EngineIcons/icon_state.svg"
 
@@ -7,20 +9,26 @@ onready var stateMachine: Node = _get_state_machine(self)
 
 # warning-ignore:unused_argument
 func unhandled_input(event: InputEvent) -> void:
+	#* Here you can write logic which will be called in unhandled input
+    #! DO NOT USE _unhandled_input() in inherited class
 	return
 
 
 # warning-ignore:unused_argument
 func physics_process(delta: float) -> void:
+	#* Here you can write logic which will be called in _physics_process()
+    #! DO NOT USE _physics_process() in inherited class
 	return
 
 
 # warning-ignore:unused_argument
 func enter(msg: Dictionary = {}) -> void:
+	#* Here you can write logic which will be called on entering state
 	return
 
 
 func exit() -> void:
+	#* Here you can write logic which will be called on exiting state
 	return
 
 

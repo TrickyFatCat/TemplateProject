@@ -1,5 +1,5 @@
 extends State
-class_name MoveState
+class_name EntityMove
 
 var move_direction : Vector2 = Vector2.ZERO
 var velocity : Vector2 = Vector2.ZERO

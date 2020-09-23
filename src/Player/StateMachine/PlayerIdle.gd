@@ -1,6 +1,4 @@
-extends State
-
-onready var state_move : State = get_parent()
+extends EntitySubMove
 
 
 func unhandled_input(event: InputEvent) -> void:

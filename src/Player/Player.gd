@@ -1,3 +1,5 @@
+#* Player character main script
+
 extends Entity
 class_name Player
 
@@ -17,6 +19,12 @@ func ready() -> void:
 	pass
 
 
+func on_spawn() -> void:
+	# TODO add spawn logic on player
+	Events.emit_signal("player_spawned")
+	pass
+
+
 func on_get_damage(damage: int) -> void:
 	# TODO add logic on get damage
 	pass
@@ -33,6 +41,7 @@ func on_zero_hitpoints() -> void:
 	# TODO add logic on zero hitpoints
 	Events.emit_signal("player_dead")
 	self.is_active = false
+	stateMachine.transition_to("Death")
 	pass
 
 

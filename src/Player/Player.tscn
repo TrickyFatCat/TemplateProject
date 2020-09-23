@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://src/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://src/singletons/PlayerCamera/PlayerCamera.tscn" type="PackedScene" id=2]
@@ -15,6 +15,9 @@
 [ext_resource path="res://src/Player/StateMachine/PlayerIdle.gd" type="Script" id=13]
 [ext_resource path="res://src/main/Entity/BaseStates/EntitiyInactive.gd" type="Script" id=14]
 [ext_resource path="res://src/Player/StateMachine/PlayerDash.gd" type="Script" id=15]
+[ext_resource path="res://src/main/Entity/BaseStates/EntityDeath.gd" type="Script" id=16]
+[ext_resource path="res://src/main/Entity/BaseStates/EntitySpawn.gd" type="Script" id=17]
+[ext_resource path="res://src/main/Entity/BaseStates/EntityDespawn.gd" type="Script" id=18]
 
 [sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
@@ -44,7 +47,7 @@ script = ExtResource( 1 )
 velocity_max = 300.0
 acceleration = 4000.0
 friction = 4000.0
-dash_velocity = 2000.0
+dash_velocity = 1500.0
 
 [node name="AnimatedSprite" parent="." instance=ExtResource( 4 )]
 material = SubResource( 2 )
@@ -75,7 +78,13 @@ initial_state = NodePath("Move/Idle")
 script = ExtResource( 14 )
 
 [node name="Spawn" type="Node" parent="StateMachine"]
-script = ExtResource( 6 )
+script = ExtResource( 17 )
+
+[node name="Despawn" type="Node" parent="StateMachine"]
+script = ExtResource( 18 )
+
+[node name="Death" type="Node" parent="StateMachine"]
+script = ExtResource( 16 )
 
 [node name="Move" type="Node" parent="StateMachine"]
 script = ExtResource( 10 )
@@ -90,9 +99,6 @@ script = ExtResource( 12 )
 script = ExtResource( 15 )
 
 [node name="Stunlock" type="Node" parent="StateMachine/Move"]
-script = ExtResource( 6 )
-
-[node name="Death" type="Node" parent="StateMachine"]
 script = ExtResource( 6 )
 
 [node name="ScentSpawner" parent="." instance=ExtResource( 11 )]

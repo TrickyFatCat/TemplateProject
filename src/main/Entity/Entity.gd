@@ -1,5 +1,10 @@
+#* It's a base entity class, which containg the most basic logic for the player character and enmies
+
 extends KinematicBody2D
 class_name Entity
+
+signal spawn
+signal death
 
 export(int) var hitpoints_max := 100
 export(int) var hitpoints_initial := 100
@@ -31,7 +36,7 @@ func set_is_active(value: bool) -> void:
 
 
 func switch_logic(value: bool) -> void:
-	# Add any logic for set_is_active
+	#* Here you can write logic which will be called on activation and deactivation of the entity
 	pass
 
 
@@ -48,6 +53,7 @@ func deactivate_damage_detection() -> void:
 	damageDetector.is_active = false
 
 
+#! DO NOT USE _ready() in inherited classes use ready() instead
 func _ready() -> void:
 	_connect_signals()
 	_apply_parameters()
@@ -56,22 +62,33 @@ func _ready() -> void:
 
 
 func ready() -> void:
-	# Add any logic on ready
+	#* Here you can write logic which will be called on _ready
+	
+	pass
+
+
+func on_spawn() -> void:
+	#* Here you can write logic which will be called after entity spawn
 	pass
 
 
 func on_get_damage(damage: int) -> void:
-	# Add any logic on getting damage
+	#* Here you can write logic which will be called after getting damage
 	pass
 
 
 func on_hitpoints_decreased() -> void:
-	# Add any logic on hitpoints decreasing
+	#* Here you can write logic which will be called on hitpoitns decreament
 	pass
 
 
 func on_zero_hitpoints() -> void:
-	# Add any logic on zero hitpoints
+	#* Here you can write logic which will be called on zero hitpoints
+	pass
+
+
+func on_death() -> void:
+	#* Here you can write logic which will be called right after exiting Death state
 	pass
 
 
@@ -80,6 +97,7 @@ func get_current_hitpoints() -> int:
 
 
 func _connect_signals() -> void:
+	connect("spawn", self, "on_spawn")
 	damageDetector.connect("get_damage", self, "_decrease_hitpoints")
 	damageDetector.connect("get_damage", self, "on_get_damage")
 	hitPoints.connect("value_decreased", self, "on_hitpoints_decreased")

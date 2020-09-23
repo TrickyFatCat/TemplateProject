@@ -10,8 +10,6 @@ extents = Vector2( 20, 20 )
 
 [node name="Player" parent="Objects" index="0"]
 position = Vector2( 0, 24 )
-hitpoints_max = 100
-hitpoints_initial = 100
 velocity_max = 400.0
 
 [node name="BaseEnemy" parent="Objects" index="1" instance=ExtResource( 2 )]

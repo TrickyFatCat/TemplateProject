@@ -1,6 +1,7 @@
-extends State
+#* Basic player dash logic
+# TODO add cooldown timer or charge system for the dash
 
-onready var state_move : MoveState = get_parent()
+extends EntitySubMove
 
 
 func unhandled_input(event: InputEvent) -> void:

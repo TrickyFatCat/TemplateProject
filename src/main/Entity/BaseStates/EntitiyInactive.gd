@@ -1,5 +1,5 @@
 extends State
-class_name StateInactive
+class_name EntityInactive
 
 
 func unhandled_input(event: InputEvent) -> void:
