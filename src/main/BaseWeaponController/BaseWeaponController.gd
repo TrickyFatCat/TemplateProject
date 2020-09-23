@@ -1,3 +1,5 @@
+#* This is a base weapon controller which contains the most basic logic for all weapon controllers
+
 extends Node2D
 class_name WeaponController
 
@@ -14,12 +16,7 @@ func flip_weapon() -> void:
 
 
 func switch_z_index() -> void:
-	var abs_rotation = fmod(rotation_degrees, 360.0)
-	
-	if abs_rotation < 180:
-		z_index = 0
-	else:
-		z_index = -1
+	z_index = sign(fmod(global_rotation_degrees, 360.0))
 
 
 func _set_is_active(value: bool) -> void:
