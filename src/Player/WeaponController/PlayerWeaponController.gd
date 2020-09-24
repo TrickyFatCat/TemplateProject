@@ -28,7 +28,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("shoot") and _is_enough_ammo():
 		is_shooting = true
 
-	if event.is_action_released("shoot") and weapon.mode == Weapon.shoot_mode.AUTO and _is_enough_ammo():
+	if event.is_action_released("shoot") and weapon.mode == Weapon.ShootMode.AUTO and _is_enough_ammo():
 		is_shooting = false
 		# TODO Add charge logic here
 
@@ -37,10 +37,10 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func _physics_process(delta: float) -> void:
 	match InputManager.current_input_device:
-		InputManager.input_device.KEYBOARD:
+		InputManager.InputDevice.KEYBOARD:
 			look_at(get_global_mouse_position())
 			pass
-		InputManager.input_device.GAMEPAD:
+		InputManager.InputDevice.GAMEPAD:
 			if InputManager.get_analog_right_direction(InputManager.joy_id_current) != Vector2.ZERO:
 				rotation = _get_joystick_rotation()
 			pass
@@ -57,7 +57,7 @@ func _process(delta: float) -> void:
 	if is_shooting and _is_enough_ammo():
 		weapon.process_shoot()
 
-		if weapon.mode == Weapon.shoot_mode.SEMI_AUTO:
+		if weapon.mode == Weapon.ShootMode.SEMI_AUTO:
 			is_shooting = false
 
 

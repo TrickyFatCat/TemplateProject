@@ -6,10 +6,14 @@
 [resource]
 script = ExtResource( 1 )
 sprite = ExtResource( 2 )
-velocity_initial = 100.0
+motion_type = 2
+velocity_initial = 5.0
 velocity_max = 100.0
 acceleration = 100.0
-friction = 100.0
+friction = 1.0
 is_bounceable = true
+bounce_type = 0
+bounce_velocity_factor = 1.0
+bounce_direction_noise = 20.0
 spawned_scene_path = ""
 spawned_scene_damage = 100

@@ -21,8 +21,8 @@ func _on_body_entered(body: KinematicBody2D) -> void:
 	if not is_invulnerable:
 		emit_signal("get_damage", body.damage)
 	
-	# TODO rethink destroying projectiles
-	body.queue_free()
+	if body is Projectile:
+		body.destroy()
 
 
 func get_damage(damage: int) -> void:

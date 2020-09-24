@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://src/main/SpecificNodes/DamageDetector/DamageDetector.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/main/SpecificNodes/SpritesWithFlash/Animated/AnimatedSpriteFlash.tscn" type="PackedScene" id=2]
@@ -12,6 +12,8 @@
 [ext_resource path="res://src/main/Entity/BaseStates/EntityDeath.gd" type="Script" id=10]
 [ext_resource path="res://src/main/Entity/BaseStates/EntitySpawn.gd" type="Script" id=11]
 [ext_resource path="res://src/main/Entity/BaseStates/EntityDespawn.gd" type="Script" id=12]
+[ext_resource path="res://src/main/Entity/BaseStates/MoveStates/EntitySubMove.gd" type="Script" id=13]
+[ext_resource path="res://src/main/Entity/BaseStates/MoveStates/EntityMove.gd" type="Script" id=14]
 
 [sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
@@ -84,7 +86,7 @@ script = ExtResource( 12 )
 script = ExtResource( 10 )
 
 [node name="Move" type="Node" parent="StateMachine"]
-script = ExtResource( 7 )
+script = ExtResource( 14 )
 
 [node name="Idle" type="Node" parent="StateMachine/Move"]
 script = ExtResource( 7 )
@@ -96,4 +98,4 @@ script = ExtResource( 7 )
 script = ExtResource( 8 )
 
 [node name="Stunlock" type="Node" parent="StateMachine/Move"]
-script = ExtResource( 7 )
+script = ExtResource( 13 )

@@ -1,6 +1,6 @@
 extends Node
 
-enum input_device {
+enum InputDevice {
 	KEYBOARD,
 	GAMEPAD
 }
@@ -8,20 +8,20 @@ enum input_device {
 const JOY_DEADZONE : float = 0.25
 const JOY_ID_DEFAULT : int = 0
 
-var current_input_device : int = input_device.KEYBOARD
+var current_input_device : int = InputDevice.KEYBOARD
 var joy_id_current : int = JOY_ID_DEFAULT
 
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventKey or event is InputEventMouse:
-		current_input_device = input_device.KEYBOARD
+		current_input_device = InputDevice.KEYBOARD
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 		Events.emit_signal("input_device_changed", current_input_device)
 		return
 
 	if event is InputEventJoypadButton or event is InputEventJoypadMotion:
 		joy_id_current = event.device
-		current_input_device = input_device.GAMEPAD
+		current_input_device = InputDevice.GAMEPAD
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 		Events.emit_signal("input_device_changed", current_input_device)
 		return

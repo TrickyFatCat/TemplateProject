@@ -4,12 +4,12 @@ class_name Weapon
 signal shoot()
 signal switched()
 
-enum shoot_mode{
+enum ShootMode{
 	AUTO,
 	SEMI_AUTO
 }
 
-enum bullet{
+enum BulletType{
 	PROJECTILE,
 	RAYCAST,
 	BEAM
@@ -19,22 +19,22 @@ const RECOIL_POWER : float = 25.0
 const RECOVERY_SPEED : float = 0.2
 const PROJECTILE_DEFAULT : String = "res://src/main/BaseProjectile/BaseProjectile.tscn"
 
-# General parameters
+#* General parameters
 var weapon_name : String
 
-# Damage parameters
+#* Damage parameters
 var mode : int
 var damage : int
 var rate_of_fire : float
 
-# Bullet parameters
+#* Bullet parameters
 var bullet_type : int
 var spawn_point : Vector2 = Vector2.ZERO
 var bullets_count : int
 var projectile_resource : String
 var projectile_scene_path : String
 
-# Spread params
+#* Spread params
 var is_spread_dynamic : bool
 var spread_min : float
 var spread_max : float
@@ -42,7 +42,7 @@ var spread : float
 var spread_increase_shift : float
 var spread_decrease_shift : float
 
-# Ammo parameters
+#* Ammo parameters
 var ammo_id : int
 var ammo_cost : int
 
@@ -61,7 +61,6 @@ func _physics_process(delta: float) -> void:
 
 	if is_spread_dynamic and spread != spread_min:
 		_decrease_spread()
-		# update()
 
 
 func process_shoot() -> void:
@@ -83,20 +82,20 @@ func process_shoot() -> void:
 
 
 func apply_parameters(parameters: WeaponParameters) -> void:
-	# General parameters
+	#* General parameters
 	weapon_name = parameters.weapon_name
 	sprite.texture = parameters.sprite
 	sprite.position = parameters.sprite_offset
 	sprite_init_pos = parameters.sprite_offset
 
-	# Damage parameters
+	#* Damage parameters
 	mode = parameters.shoot_mode
 	damage = parameters.damage
 	rate_of_fire = parameters.rate_of_fire
 	rofTimer.wait_time = 1 / rate_of_fire
 	rofTimer.stop()
 
-	# Bullet  parameters
+	#* Bullet  parameters
 	bullet_type = parameters.bullet_type
 	spawn_point.x = parameters.spawn_offset_x
 	bullets_count = parameters.bullets_count
@@ -111,7 +110,7 @@ func apply_parameters(parameters: WeaponParameters) -> void:
 	else:
 		projectile_scene_path = PROJECTILE_DEFAULT
 
-	# Spread parameters		
+	#* Spread parameters		
 	is_spread_dynamic = parameters.is_spread_dynamic
 	spread_min = parameters.spread_min
 	spread_max = parameters.spread_max
@@ -119,7 +118,7 @@ func apply_parameters(parameters: WeaponParameters) -> void:
 	spread_increase_shift = parameters.spread_increase_shift
 	spread_decrease_shift = parameters.spread_decrease_shift
 
-	# Ammo parametenrs
+	#* Ammo parametenrs
 	ammo_id = parameters.ammo_type
 	ammo_cost = parameters.ammo_cost
 
@@ -136,7 +135,7 @@ func _spawn_projectile() -> void:
 	GameManager.current_level.objects_node.add_child(projectile_instance)
 	projectile_instance.global_position = projectile_spawn_position
 	projectile_instance.rotation_degrees = projectile_rotation
-	projectile_instance.direction = Vector2.RIGHT.rotated(projectile_instance.rotation)
+	projectile_instance.move_direction = Vector2.RIGHT.rotated(projectile_instance.rotation)
 	projectile_parameters.damage = damage
 	projectile_instance.apply_parameters(projectile_parameters)
 
@@ -164,15 +163,3 @@ func _increase_spread() -> void:
 func _decrease_spread() -> void:
 	spread -= spread_decrease_shift
 	spread = max(spread, spread_min)
-
-
-# func _draw() -> void:
-# 	var debug_color = Color.aqua
-# 	var line_width = 3
-# 	var line_length = (Utility.get_facing_direction(self) * 1000)
-# 	var spread_threshhold = deg2rad(spread / 2)
-# 	var spawn_pos = global_position + spawn_point #.rotated(spread_threshhold)
-# 	var target_point_a = spawn_pos + line_length.rotated(spread_threshhold)
-# 	var target_point_b = spawn_pos + line_length.rotated(-spread_threshhold)
-# 	draw_line(spawn_pos, target_point_a, debug_color, line_width)
-# 	draw_line(spawn_pos, target_point_b, debug_color, line_width)
