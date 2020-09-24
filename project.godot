@@ -22,7 +22,7 @@ _global_script_classes=[ {
 "base": "Area2D",
 "class": "DamageDetector",
 "language": "GDScript",
-"path": "res://src/main/SpecificNodes/DamageDetector/DamageDetector.gd"
+"path": "res://src/DamageDetector/DamageDetector.gd"
 }, {
 "base": "Entity",
 "class": "Enemy",
@@ -77,7 +77,12 @@ _global_script_classes=[ {
 "base": "AnimatedSprite",
 "class": "FlashingAnimatedSprite",
 "language": "GDScript",
-"path": "res://src/main/SpecificNodes/SpritesWithFlash/Animated/AnimatedSpriteFlash.gd"
+"path": "res://src/SpritesWithFlash/Animated/AnimatedSpriteFlash.gd"
+}, {
+"base": "Sprite",
+"class": "FlashingSprite",
+"language": "GDScript",
+"path": "res://src/SpritesWithFlash/Standard/SpriteFlash.gd"
 }, {
 "base": "BaseResource",
 "class": "HitPoints",
@@ -154,6 +159,7 @@ _global_script_class_icons={
 "EntitySubMove": "",
 "Explosion": "",
 "FlashingAnimatedSprite": "",
+"FlashingSprite": "",
 "HitPoints": "",
 "Player": "",
 "PlayerCamera": "",
