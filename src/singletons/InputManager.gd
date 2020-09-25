@@ -1,3 +1,6 @@
+#* This singleton controlling current active input device.
+#* It needs for changing HUD icons and for controlling player aiming and camera.
+
 extends Node
 
 enum InputDevice {
@@ -27,6 +30,10 @@ func _input(event: InputEvent) -> void:
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 		Events.emit_signal("input_device_changed", current_input_device)
 		return
+
+
+func _ready() -> void:
+	get_viewport().warp_mouse(OS.get_real_window_size() / 2)
 
 
 static func get_joy_analog_direction(joy_index: int, axis_x: int, axis_y: int) -> Vector2:

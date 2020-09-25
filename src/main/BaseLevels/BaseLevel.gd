@@ -1,3 +1,5 @@
+#* This script contains a basic logic of game levels.
+
 extends Node
 class_name BaseLevel
 

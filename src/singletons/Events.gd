@@ -16,6 +16,7 @@ signal player_shoot(ammo_id, ammo_current)
 signal player_switched_weapon(ammo_id, ammo_current, ammo_max)
 
 # Hud signals
+signal mouse_moved()
 # TODO Add HUD signals here
 
 # Transition signals
