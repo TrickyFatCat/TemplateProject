@@ -35,7 +35,6 @@ var bounce_direction_noise : float
 
 #* Spawned scene parameters
 var spawned_scene_path : String
-var spawned_scene_damage : int
 
 onready var sprite : Sprite = $Sprite
 
@@ -73,11 +72,11 @@ func apply_parameters(parameters: ProjectileParameters) -> void:
 
 	#* Spawned scene parameters
 	spawned_scene_path = parameters.spawned_scene_path
-	spawned_scene_damage = parameters.spawned_scene_damage
 
 
-func destroy() -> void:
+func destroy(is_spawning: bool = true) -> void:
 	# TODO add destroy logic here
+	# TODO add spawn logic on destroy here
 	queue_free()
 	pass
 

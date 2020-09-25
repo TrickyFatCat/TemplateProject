@@ -22,7 +22,8 @@ export(float) var bounce_direction_noise = 40.0
 
 #* Spawned scene parameters
 export(String, FILE, "*.tscn") var spawned_scene_path
-export(int) var spawned_scene_damage := 100
+export(String, FILE, "*.tres") var spawned_scene_resource
+export(int) var scenes_number := 1
 
 #* Damage parameters
 var damage : int = 1
