@@ -6,8 +6,6 @@
 extends Button
 class_name ButtonText
 
-export(bool) var is_focused_on_ready := false
-export(bool) var enable_mouse_warp := false
 export(Color) var font_color_normal = Color.whitesmoke
 export(Color) var font_color_focus = Color.orange
 export(Color) var font_color_hover = Color.orange # TODO add color change on hover
@@ -28,21 +26,14 @@ func _init() -> void:
 	connect("button_down", self, "_on_button_down")
 	connect("button_up", self, "_on_button_up")
 	Events.connect("input_device_changed", self, "_switch_mouse_filter")
-	Events.connect("transition_screen_started_transition", self, "_on_transition_started")
-	Events.connect("transition_screen_opened", self, "_on_transition_opened")
 
 	
 
 func _ready() -> void:
-	if is_focused_on_ready:
-		grab_focus()
-	
+	# TODO get rid off this hack
 	buttonText.text = text
 	buttonText.visible = true
 	text = ""
-	
-	if enable_mouse_warp:
-		get_viewport().warp_mouse(rect_position)
 
 
 func on_button_up() -> void:
@@ -90,21 +81,13 @@ func _switch_mouse_filter(_device_index: int) -> void:
 		return
 
 
-func _on_transition_started() -> void:
-	self.is_active = false
-
-
-func _on_transition_opened() -> void:
-	self.is_active = true
-
-
 func _set_is_active(value: bool) -> void:
 	is_active = value
-	disabled = value
-	
-	if value:
+	disabled = not value
+
+	if disabled:
 		mouse_filter = MOUSE_FILTER_IGNORE
 		focus_mode = FOCUS_NONE
 	else:
-		mouse_filter = MOUSE_FILTER_STOP
+		_switch_mouse_filter(InputManager.current_input_device)
 		focus_mode = FOCUS_ALL

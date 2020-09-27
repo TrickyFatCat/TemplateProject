@@ -94,6 +94,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/main/BaseResources/HitPoints/HitPoints.gd"
 }, {
+"base": "Control",
+"class": "Menu",
+"language": "GDScript",
+"path": "res://interface/main/BaseMenu.gd"
+}, {
 "base": "Entity",
 "class": "Player",
 "language": "GDScript",
@@ -167,6 +172,7 @@ _global_script_class_icons={
 "FlashingAnimatedSprite": "",
 "FlashingSprite": "",
 "HitPoints": "",
+"Menu": "",
 "Player": "",
 "PlayerCamera": "",
 "PlayerTrigger": "",

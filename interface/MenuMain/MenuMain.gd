@@ -1,9 +1,14 @@
 #* This script contains logic of the main menu.
 
 tool
-extends CanvasLayer
+extends Menu
 
 export(String, FILE, "*.tscn") var starting_level
+
+
+func _ready() -> void:
+	_set_menu_buttons($Menu/MenuBody/Buttonts)
+	_focus_first_button()
 
 
 func _get_configuration_warning() -> String:
@@ -12,20 +17,22 @@ func _get_configuration_warning() -> String:
 
 
 func _on_ButtonStart_button_up() -> void:
-    Events.emit_signal("load_level", {"target_level": starting_level})
-    pass
+	_set_buttons_active(false)
+	Events.emit_signal("load_level", {"target_level": starting_level})
+	pass
 
 
 func _on_ButtonHelp_button_up() -> void:
-    # TODO add help screen
-    pass
+	# TODO add help screen
+	pass
 
 
 func _on_ButtonCredits_button_up() -> void:
-    # TODO add credits screen
-    pass
+	# TODO add credits screen
+	pass
 
 
 func _on_ButtonQuit_button_up() -> void:
-    Events.emit_signal("quit_game")
-    pass
+	_set_buttons_active(false)
+	Events.emit_signal("quit_game")
+	pass

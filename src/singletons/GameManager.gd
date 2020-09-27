@@ -12,12 +12,8 @@ var objects_node : YSort
 var transition_command : String
 
 
-func _input(event: InputEvent) -> void:
-	# TODO update pause controls
-	if event.is_action_pressed("ui_exit"):
-		print_debug("Game paused")
-		get_tree().paused = !get_tree().paused
-	pass
+func _init() -> void:
+	pause_mode = PAUSE_MODE_PROCESS
 
 
 func _ready() -> void:
@@ -30,6 +26,9 @@ func _ready() -> void:
 
 
 func _process_transition_command() -> void:
+	if Utility.is_game_paused():
+		Utility.unpause_game()
+		
 	match transition_command:
 		LEVEL_NEXT:
 			LevelController.load_next_level()

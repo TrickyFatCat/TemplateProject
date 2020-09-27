@@ -8,7 +8,9 @@
 [ext_resource path="res://materials/Transition/mat_Transition.tres" type="Material" id=6]
 
 [node name="TransitionScreen" type="CanvasLayer"]
+pause_mode = 2
 process_priority = 1
+layer = 3
 script = ExtResource( 3 )
 
 [node name="ColorRect" type="ColorRect" parent="."]

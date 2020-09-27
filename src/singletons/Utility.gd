@@ -17,16 +17,13 @@ static func get_distance_to_player(target: Node2D) -> float:
     return get_player_position().distance_to(target.global_position)
     
 
-static func approachf(value_initial: float, value_target: float, shift: float) -> float:
-    if value_initial < value_target:
-        return min(value_initial + shift, value_target)
-    else:
-        return max(value_initial - shift, value_target)
+func is_game_paused() -> bool:
+    return get_tree().paused
 
 
-static func approachi(value_initial: int, value_target: int, shift: int) -> int:
-    if value_initial < value_target:
-        return int(min(value_initial + shift, value_target))
-    else:
-        return int(max(value_initial - shift, value_target))
+func pause_game() -> void:
+    get_tree().paused = true
 
+
+func unpause_game() -> void:
+    get_tree().paused = false
