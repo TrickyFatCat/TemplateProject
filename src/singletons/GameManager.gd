@@ -12,9 +12,10 @@ var objects_node : YSort
 var transition_command : String
 
 
-func _unhandled_input(event: InputEvent) -> void:
+func _input(event: InputEvent) -> void:
 	# TODO update pause controls
-	if event.is_action_pressed("ui_cancel"):
+	if event.is_action_pressed("ui_exit"):
+		print_debug("Game paused")
 		get_tree().paused = !get_tree().paused
 	pass
 

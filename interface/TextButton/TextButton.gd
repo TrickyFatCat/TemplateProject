@@ -15,6 +15,7 @@ export(Color) var font_color_press = Color.yellow
 export(Color) var font_color_disable = Color.gray # TODO add color change on disable
 
 var is_mouse_inside : bool = false
+var is_active : bool = true setget _set_is_active # Deactivates the button but doesn't change its appearance
 
 onready var buttonText : Label = $ButtonText
 
@@ -27,6 +28,8 @@ func _init() -> void:
 	connect("button_down", self, "_on_button_down")
 	connect("button_up", self, "_on_button_up")
 	Events.connect("input_device_changed", self, "_switch_mouse_filter")
+	Events.connect("transition_screen_started_transition", self, "_on_transition_started")
+	Events.connect("transition_screen_opened", self, "_on_transition_opened")
 
 	
 
@@ -79,10 +82,29 @@ func _change_font_color(color: Color) -> void:
 
 func _switch_mouse_filter(_device_index: int) -> void:
 	if InputManager.is_current_input_keyboard():
-		mouse_filter = Control.MOUSE_FILTER_STOP
+		mouse_filter = MOUSE_FILTER_STOP
 		return
 		
 	if InputManager.is_current_input_gamepad():
-		mouse_filter = Control.MOUSE_FILTER_IGNORE
+		mouse_filter = MOUSE_FILTER_IGNORE
 		return
 
+
+func _on_transition_started() -> void:
+	self.is_active = false
+
+
+func _on_transition_opened() -> void:
+	self.is_active = true
+
+
+func _set_is_active(value: bool) -> void:
+	is_active = value
+	disabled = value
+	
+	if value:
+		mouse_filter = MOUSE_FILTER_IGNORE
+		focus_mode = FOCUS_NONE
+	else:
+		mouse_filter = MOUSE_FILTER_STOP
+		focus_mode = FOCUS_ALL

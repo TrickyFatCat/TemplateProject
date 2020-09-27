@@ -16,11 +16,12 @@ signal player_shoot(ammo_id, ammo_current)
 signal player_switched_weapon(ammo_id, ammo_current, ammo_max)
 
 # Hud signals
-signal mouse_moved()
+signal show_menu_pause()
 # TODO Add HUD signals here
 
 # Transition signals
 signal transition_screen_opened()
+signal transition_screen_started_transition()
 signal transition_screen_closed()
 
 # Game saver signals

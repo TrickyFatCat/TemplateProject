@@ -65,3 +65,7 @@ func is_current_input_keyboard() -> bool:
 
 func is_current_input_gamepad() -> bool:
 	return current_input_device == InputDevice.GAMEPAD
+
+
+
+	

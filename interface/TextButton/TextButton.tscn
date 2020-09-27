@@ -5,7 +5,7 @@
 
 [sub_resource type="StyleBoxEmpty" id=1]
 
-[sub_resource type="StyleBoxEmpty" id=5]
+[sub_resource type="StyleBoxEmpty" id=2]
 
 [sub_resource type="DynamicFont" id=3]
 size = 26
@@ -19,7 +19,7 @@ font_data = ExtResource( 1 )
 margin_right = 210.0
 margin_bottom = 40.0
 custom_styles/hover = SubResource( 1 )
-custom_styles/focus = SubResource( 5 )
+custom_styles/focus = SubResource( 2 )
 custom_fonts/font = SubResource( 3 )
 shortcut_in_tooltip = false
 text = "BUTTON LABLE"
