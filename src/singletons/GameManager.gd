@@ -12,14 +12,6 @@ var objects_node : YSort
 var transition_command : String
 
 
-func _notification(what: int) -> void:
-	if what == MainLoop.NOTIFICATION_WM_FOCUS_OUT:
-		if current_level.has_node("Hud"):
-			Utility.pause_game()
-			Events.emit_signal("open_menu_pause")
-		pass
-
-
 func _ready() -> void:
 	Events.connect("load_level", self, "_start_level_loading")
 	Events.connect("restart_level", self, "_start_level_restart")

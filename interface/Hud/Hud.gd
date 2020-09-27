@@ -1,6 +1,12 @@
 extends CanvasLayer
 
 
+func _notification(what: int) -> void:
+    if what == MainLoop.NOTIFICATION_WM_FOCUS_OUT:
+        Utility.pause_game()
+        Events.emit_signal("open_menu_pause")
+
+
 func _input(event: InputEvent) -> void:
 	# TODO update pause controls
 	if event.is_action_pressed("ui_exit"):
