@@ -29,6 +29,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/DamageDetector/DamageDetector.gd"
 }, {
+"base": "Control",
+"class": "DataPanel",
+"language": "GDScript",
+"path": "res://interface/main/BaseDataPanel.gd"
+}, {
 "base": "Entity",
 "class": "Enemy",
 "language": "GDScript",
@@ -159,6 +164,7 @@ _global_script_class_icons={
 "BaseResource": "",
 "ButtonText": "",
 "DamageDetector": "",
+"DataPanel": "",
 "Enemy": "",
 "EnemyChaseState": "",
 "Entity": "",

@@ -12,9 +12,10 @@ var ammo_cost_current : int = 0
 
 var ammo : Array = [
 	[10, 10],
-	[10, 10]
+	[10, 15]
 ]
 
+# TODO add weapon slots
 onready var weapon : Weapon = $BaseWeapon
 
 

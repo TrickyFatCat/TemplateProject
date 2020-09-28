@@ -32,7 +32,7 @@ func on_get_damage(damage: int) -> void:
 
 
 func on_hitpoints_decreased() -> void:
-	Events.emit_signal("player_took_damage")
+	Events.emit_signal("player_took_damage", hitPoints.value)
 	Events.emit_signal("shake_camera")
 	sprite.start_flash(true)
 	pass

@@ -63,7 +63,6 @@ func _ready() -> void:
 
 func ready() -> void:
 	#* Here you can write logic which will be called on _ready
-	
 	pass
 
 
@@ -92,7 +91,11 @@ func on_death() -> void:
 	pass
 
 
-func get_current_hitpoints() -> int:
+func get_hitpoints_current() -> int:
+	return hitPoints.value
+
+
+func get_hitpoints_max() -> int:
 	return hitPoints.value
 
 

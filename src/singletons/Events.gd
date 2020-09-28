@@ -10,7 +10,7 @@ signal level_exit()
 
 # Player signals
 signal player_spawned()
-signal player_took_damage()
+signal player_took_damage(hitpoints_new)
 signal player_dead()
 signal player_shoot(ammo_id, ammo_current)
 signal player_switched_weapon(weapon_name, ammo_id, ammo_current, ammo_max)
