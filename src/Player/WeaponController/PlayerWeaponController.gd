@@ -20,7 +20,6 @@ onready var weapon : Weapon = $BaseWeapon
 
 func _ready() -> void:
 	weapon.connect("shoot", self, "_process_shoot")
-	weapon.connect("switched", self, "_process_switch")
 	_switch_weapon(0)
 
 
@@ -99,13 +98,12 @@ func _switch_weapon(new_weapon_id: int) -> void:
 		push_error(error_text)
 		return
 	
-	weapon.apply_parameters(WEAPONS[new_weapon_id])
-
-
-func _process_switch() -> void:
-	ammo_id_current = weapon.ammo_id
-	ammo_cost_current = weapon.ammo_cost
-	Events.emit_signal("player_switched_weapon", ammo_id_current, get_ammo_current(ammo_id_current), get_ammo_max(ammo_id_current))
+	var weapon_parameters = WEAPONS[new_weapon_id]
+	weapon.apply_parameters(weapon_parameters)
+	ammo_id_current = weapon_parameters.ammo_type
+	ammo_cost_current = weapon_parameters.ammo_cost
+	# TODO reconsider data in signal
+	Events.emit_signal("player_switched_weapon", weapon_parameters.weapon_name,  ammo_id_current, get_ammo_current(ammo_id_current), get_ammo_max(ammo_id_current))
 
 
 func _process_weapon_switch_wheel(event: InputEvent) -> void:
@@ -114,8 +112,6 @@ func _process_weapon_switch_wheel(event: InputEvent) -> void:
 		
 		if weapon_id == WEAPONS.size():
 			weapon_id = 0
-		
-		_switch_weapon(weapon_id)
 	
 	if event.is_action_pressed("choose_weapon_previous"):
 		weapon_id -= 1
@@ -123,7 +119,7 @@ func _process_weapon_switch_wheel(event: InputEvent) -> void:
 		if weapon_id < 0:
 			weapon_id = WEAPONS.size() - 1
 		
-		_switch_weapon(weapon_id)
+	_switch_weapon(weapon_id)
 
 
 func _get_joystick_rotation() -> float:

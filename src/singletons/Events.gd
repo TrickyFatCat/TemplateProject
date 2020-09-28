@@ -13,16 +13,16 @@ signal player_spawned()
 signal player_took_damage()
 signal player_dead()
 signal player_shoot(ammo_id, ammo_current)
-signal player_switched_weapon(ammo_id, ammo_current, ammo_max)
+signal player_switched_weapon(weapon_name, ammo_id, ammo_current, ammo_max)
 
 # Hud signals
+# TODO clean these signals, some of them are excessive
 signal open_menu_pause()
 signal close_menu_pause()
 signal menu_pause_opened()
 signal menu_pause_closed()
 signal show_hud()
 signal hide_hud()
-# TODO Add HUD signals here
 
 # Transition signals
 signal transition_screen_opened()

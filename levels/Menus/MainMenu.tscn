@@ -10,3 +10,4 @@ __meta__ = {
 }
 
 [node name="MenuMain" parent="." instance=ExtResource( 2 )]
+is_active = true

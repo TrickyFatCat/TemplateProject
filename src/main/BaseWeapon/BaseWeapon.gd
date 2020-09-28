@@ -2,7 +2,6 @@ extends Node2D
 class_name Weapon
 
 signal shoot()
-signal switched()
 
 enum ShootMode{
 	AUTO,
@@ -121,8 +120,6 @@ func apply_parameters(parameters: WeaponParameters) -> void:
 	#* Ammo parametenrs
 	ammo_id = parameters.ammo_type
 	ammo_cost = parameters.ammo_cost
-
-	emit_signal("switched")
 
 
 
