@@ -29,6 +29,5 @@ func update_all_values(current_value: int, max_vaule: int) -> void:
     _update_text()
 
 
-
 func _update_text() -> void:
     text = String(zeros % value_current) + "/" + String(zeros % value_max)
