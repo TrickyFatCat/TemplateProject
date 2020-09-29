@@ -22,10 +22,10 @@ func _update_palyer_hitpoints(hitpoints_new: int) -> void:
 
 
 func _update_weapon_data(
-	weapon_name: String,
-	ammo_id: int,
-	ammo_current: int,
-	ammo_max: int
+		weapon_name: String,
+		ammo_id: int,
+		ammo_current: int,
+		ammo_max: int
 	) -> void:
 	weaponName.text = weapon_name
 	ammoData.update_all_values(ammo_current, ammo_max)

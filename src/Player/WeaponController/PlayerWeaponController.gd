@@ -17,13 +17,13 @@ var ammo : Array = [
 	[10, 15]
 ]
 # Array of weapon slots arrays. Weapon slot array contains 0 - weapon index, 1 - slock is unlocked
+# TODO think about a better implementation and add some kind of check for bad data
 var weapon_slots : Array = [
 	[0, true],
 	[1, true],
 	[-1,true]
 ]
 
-# TODO add weapon slots
 onready var weapon : Weapon = $BaseWeapon
 
 
@@ -139,12 +139,7 @@ func _process_weapon_switch_wheel(event: InputEvent) -> void:
 	if event.is_action_pressed("choose_weapon_previous"):
 		slot_active -= 1
 
-	if slot_active == weapon_slots.size():
-		slot_active = 0
-	elif slot_active < 0:
-		slot_active = weapon_slots.size() - 1
-
-	if not _is_slot_unlocked(slot_active):
+	if slot_active == weapon_slots.size() or slot_active < 0 or not _is_slot_unlocked(slot_active):
 		slot_active = slot_previous
 		return
 
@@ -153,6 +148,7 @@ func _process_weapon_switch_wheel(event: InputEvent) -> void:
 	if weapon_id < 0 or weapon_id >= WEAPONS.size():
 		slot_active = slot_previous
 		return
+	
 	_switch_weapon(_get_slot_weapon_id(slot_active))
 
 

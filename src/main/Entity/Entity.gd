@@ -66,22 +66,22 @@ func ready() -> void:
 	pass
 
 
-func on_spawn() -> void:
+func _on_spawn() -> void:
 	#* Here you can write logic which will be called after entity spawn
 	pass
 
 
-func on_get_damage(damage: int) -> void:
+func _on_get_damage(damage: int) -> void:
 	#* Here you can write logic which will be called after getting damage
 	pass
 
 
-func on_hitpoints_decreased() -> void:
+func _on_hitpoints_decreased() -> void:
 	#* Here you can write logic which will be called on hitpoitns decreament
 	pass
 
 
-func on_zero_hitpoints() -> void:
+func _on_zero_hitpoints() -> void:
 	#* Here you can write logic which will be called on zero hitpoints
 	pass
 
@@ -100,11 +100,10 @@ func get_hitpoints_max() -> int:
 
 
 func _connect_signals() -> void:
-	connect("spawn", self, "on_spawn")
-	damageDetector.connect("get_damage", self, "_decrease_hitpoints")
-	damageDetector.connect("get_damage", self, "on_get_damage")
-	hitPoints.connect("value_decreased", self, "on_hitpoints_decreased")
-	hitPoints.connect("value_zero", self, "on_zero_hitpoints")
+	connect("spawn", self, "_on_spawn")
+	damageDetector.connect("get_damage", self, "_on_get_damage")
+	hitPoints.connect("value_decreased", self, "_on_hitpoints_decreased")
+	hitPoints.connect("value_zero", self, "_on_zero_hitpoints")
 
 
 func _apply_parameters() -> void:
