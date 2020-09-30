@@ -9,6 +9,16 @@ export(bool) var is_active := true setget _set_is_active
 var menu_buttons : Array
 
 
+func open_menu() -> void:
+	self.is_active = true
+	_focus_first_button()
+
+
+func close_menu() -> void:
+	self.is_active = false
+	_release_focus()
+
+
 func _set_menu_buttons(menu_node: Control) -> void:
 	menu_buttons = menu_node.get_children()
 

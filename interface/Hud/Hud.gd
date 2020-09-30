@@ -1,10 +1,15 @@
 extends CanvasLayer
 
+onready var menuPause := $MenuPause
+onready var dataPanelPlayer := $DataPanelPlayer
+
 
 func _notification(what: int) -> void:
-    if what == MainLoop.NOTIFICATION_WM_FOCUS_OUT:
-        Utility.pause_game()
-        Events.emit_signal("open_menu_pause")
+	if what == MainLoop.NOTIFICATION_WM_FOCUS_OUT:
+		Utility.pause_game()
+		menuPause.open_menu()
+		dataPanelPlayer.is_active = false
+		Events.emit_signal("open_menu_pause")
 
 
 func _input(event: InputEvent) -> void:
@@ -12,9 +17,13 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_exit"):
 		if Utility.is_game_paused():
 			Utility.unpause_game()
+			menuPause.close_menu()
+			dataPanelPlayer.is_active = true
 			Events.emit_signal("close_menu_pause")
 		else:
 			Utility.pause_game()
+			menuPause.open_menu()
+			dataPanelPlayer.is_active = false
 			Events.emit_signal("open_menu_pause")
 			
 
