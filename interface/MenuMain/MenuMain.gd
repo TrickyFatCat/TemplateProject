@@ -8,7 +8,8 @@ export(String, FILE, "*.tscn") var starting_level
 
 func _ready() -> void:
 	_set_menu_buttons($Menu/MenuBody/Buttonts)
-	_focus_first_button()
+	_set_buttons_active(false)
+	Events.connect("transition_screen_opened", self, "_activate_menu")
 
 
 func _get_configuration_warning() -> String:
@@ -36,3 +37,8 @@ func _on_ButtonQuit_button_up() -> void:
 	_set_buttons_active(false)
 	Events.emit_signal("quit_game")
 	pass
+
+
+func _activate_menu() -> void:
+	_set_buttons_active(true)
+	_focus_first_button()

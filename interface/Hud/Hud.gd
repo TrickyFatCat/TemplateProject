@@ -6,25 +6,21 @@ onready var dataPanelPlayer := $DataPanelPlayer
 
 func _notification(what: int) -> void:
 	if what == MainLoop.NOTIFICATION_WM_FOCUS_OUT:
-		Utility.pause_game()
-		menuPause.open_menu()
-		dataPanelPlayer.is_active = false
-		Events.emit_signal("open_menu_pause")
+		if TransitionScreen.is_transitionig():
+			Events.connect("transition_screen_opened", self, "_open_pause_menu", [], CONNECT_ONESHOT)
+		else:
+			_open_pause_menu()
+
+		
 
 
 func _input(event: InputEvent) -> void:
 	# TODO update pause controls
-	if event.is_action_pressed("ui_exit"):
+	if event.is_action_pressed("ui_exit") and not TransitionScreen.is_transitionig():
 		if Utility.is_game_paused():
-			Utility.unpause_game()
-			menuPause.close_menu()
-			dataPanelPlayer.is_active = true
-			Events.emit_signal("close_menu_pause")
+			_close_pause_menu()
 		else:
-			Utility.pause_game()
-			menuPause.open_menu()
-			dataPanelPlayer.is_active = false
-			Events.emit_signal("open_menu_pause")
+			_open_pause_menu()
 			
 
 func _ready() -> void:
@@ -35,3 +31,17 @@ func _ready() -> void:
 
 func _deactivate_input() -> void:
 	set_process_input(false)
+
+
+func _open_pause_menu() -> void:
+	Utility.pause_game()
+	menuPause.open_menu()
+	dataPanelPlayer.is_active = false
+	Events.emit_signal("open_menu_pause")
+
+
+func _close_pause_menu() -> void:
+	Utility.unpause_game()
+	menuPause.close_menu()
+	dataPanelPlayer.is_active = true
+	Events.emit_signal("close_menu_pause")

@@ -37,4 +37,3 @@ script = ExtResource( 5 )
 
 [node name="Transition" type="Node" parent="StateMachine"]
 script = ExtResource( 1 )
-[connection signal="tween_all_completed" from="TransitionTween" to="." method="_on_TransitionTween_tween_all_completed"]
