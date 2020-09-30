@@ -16,7 +16,7 @@ func _ready() -> void:
 	hitpointsData.update_all_values(GameManager.player.get_hitpoints_current(), GameManager.player.get_hitpoints_max())
 
 
-func _update_palyer_hitpoints(hitpoints_new: int) -> void:
+func _update_player_hitpoints(hitpoints_new: int) -> void:
 	hitpointsData.update_value_current(hitpoints_new)
 	pass
 

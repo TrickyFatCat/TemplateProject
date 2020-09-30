@@ -1,3 +1,5 @@
+#* This is a simple damage detector which is used to detect incoming damage
+
 extends Area2D
 class_name DamageDetector
 
@@ -13,6 +15,8 @@ func _init() -> void:
 
 
 func _on_area_entered(area: Area2D) -> void:
+	# if not is_invulnerable and area.is_damaging:
+	# 	emit_signal("get_damage", area.damage)
 	# TODO rethink this part of the code.
 	pass
 

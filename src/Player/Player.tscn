@@ -19,8 +19,6 @@
 [ext_resource path="res://src/main/Entity/BaseStates/EntitySpawn.gd" type="Script" id=17]
 [ext_resource path="res://src/main/Entity/BaseStates/EntityDespawn.gd" type="Script" id=18]
 
-
-
 [sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
 
@@ -68,7 +66,7 @@ shape = SubResource( 3 )
 [node name="DamageDetector" parent="." instance=ExtResource( 8 )]
 position = Vector2( 0, -24 )
 collision_layer = 2147483649
-collision_mask = 48
+collision_mask = 112
 
 [node name="HitPoints" parent="." instance=ExtResource( 7 )]
 
