@@ -4,11 +4,11 @@
 [ext_resource path="res://src/main/Entity/BaseEnemy/BaseEnemy.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/main/AreaDamage/AreaDamage.tscn" type="PackedScene" id=3]
 
-[sub_resource type="RectangleShape2D" id=2]
+[sub_resource type="RectangleShape2D" id=1]
 resource_local_to_scene = true
 extents = Vector2( 48, 40 )
 
-[sub_resource type="RectangleShape2D" id=1]
+[sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 20, 20 )
 
 [node name="TestLevel" instance=ExtResource( 1 )]
@@ -16,7 +16,7 @@ extents = Vector2( 20, 20 )
 [node name="AreaDamage" parent="." index="1" instance=ExtResource( 3 )]
 
 [node name="CollisionShape2D" parent="AreaDamage" index="0"]
-shape = SubResource( 2 )
+shape = SubResource( 1 )
 
 [node name="Player" parent="Objects" index="0"]
 position = Vector2( 0, -72 )
@@ -42,7 +42,7 @@ __meta__ = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Objects/Wall" index="1"]
-shape = SubResource( 1 )
+shape = SubResource( 2 )
 
 [node name="Wall2" type="StaticBody2D" parent="Objects" index="4"]
 position = Vector2( -96, -80 )
@@ -61,6 +61,6 @@ __meta__ = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Objects/Wall2" index="1"]
-shape = SubResource( 1 )
+shape = SubResource( 2 )
 
 [editable path="AreaDamage"]

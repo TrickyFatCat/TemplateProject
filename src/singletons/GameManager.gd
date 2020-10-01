@@ -19,6 +19,7 @@ func _ready() -> void:
 	Events.connect("transition_screen_closed", self, "_process_transition_command")
 	Events.connect("level_loaded", self, "_start_opening_screen")
 	Events.connect("shake_camera", self, "_apply_camera_shake")
+	Events.connect("level_exit", self, "_start_exit_to_main_menu")
 
 
 func _process_transition_command() -> void:
@@ -35,7 +36,6 @@ func _process_transition_command() -> void:
 			pass
 		LEVEL_EXIT:
 			LevelController.load_main_menu()
-			# TODO implement exit to menu
 			pass
 		QUIT_GAME:
 			get_tree().quit()
@@ -61,6 +61,11 @@ func _start_quitting_game() -> void:
 
 func _start_level_restart() -> void:
 	transition_command = LEVEL_RESTART
+	TransitionScreen.start_transition()
+
+
+func _start_exit_to_main_menu() -> void:
+	transition_command = LEVEL_EXIT
 	TransitionScreen.start_transition()
 
 

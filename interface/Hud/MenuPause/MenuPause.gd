@@ -27,7 +27,7 @@ func _on_help_up() ->  void:
 
 func _on_exit_up() -> void:
 	_set_buttons_active(false)
-	Events.emit_signal("load_level", { "target_level": MAIN_MENU_PATH })
+	Events.emit_signal("level_exit")
 	# TODO add exit to main menu here
 	pass
 	
