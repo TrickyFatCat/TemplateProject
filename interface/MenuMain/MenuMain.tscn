@@ -1,6 +1,7 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://interface/fonts/Play-Bold.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://interface/MenuConfirm/MenuConfirm.tscn" type="PackedScene" id=2]
 [ext_resource path="res://interface/TextButton/TextButton.tscn" type="PackedScene" id=3]
 [ext_resource path="res://interface/MenuMain/MenuMain.gd" type="Script" id=4]
 
@@ -24,10 +25,9 @@ script = ExtResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-is_active = true
 starting_level = "res://levels/Levels/TestLevel.tscn"
 
-[node name="BackGround" type="ColorRect" parent="."]
+[node name="Background" type="ColorRect" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color( 0.180392, 0.172549, 0.384314, 1 )
@@ -65,7 +65,7 @@ text = "Template project"
 align = 1
 valign = 1
 
-[node name="Buttonts" type="VBoxContainer" parent="Menu/MenuBody"]
+[node name="Buttons" type="VBoxContainer" parent="Menu/MenuBody"]
 margin_top = 80.0
 margin_right = 385.0
 margin_bottom = 240.0
@@ -73,7 +73,7 @@ grow_horizontal = 2
 grow_vertical = 0
 mouse_filter = 2
 
-[node name="ButtonStart" parent="Menu/MenuBody/Buttonts" instance=ExtResource( 3 )]
+[node name="ButtonStart" parent="Menu/MenuBody/Buttons" instance=ExtResource( 3 )]
 margin_right = 385.0
 margin_bottom = 37.0
 focus_neighbour_top = NodePath("../ButtonQuit")
@@ -82,7 +82,7 @@ custom_styles/focus = SubResource( 3 )
 custom_fonts/font = SubResource( 4 )
 text = "START"
 
-[node name="ButtonHelp" parent="Menu/MenuBody/Buttonts" instance=ExtResource( 3 )]
+[node name="ButtonHelp" parent="Menu/MenuBody/Buttons" instance=ExtResource( 3 )]
 margin_top = 41.0
 margin_right = 385.0
 margin_bottom = 78.0
@@ -91,7 +91,7 @@ custom_styles/focus = SubResource( 3 )
 custom_fonts/font = SubResource( 4 )
 text = "HELP"
 
-[node name="ButtonCredits" parent="Menu/MenuBody/Buttonts" instance=ExtResource( 3 )]
+[node name="ButtonCredits" parent="Menu/MenuBody/Buttons" instance=ExtResource( 3 )]
 margin_top = 82.0
 margin_right = 385.0
 margin_bottom = 119.0
@@ -100,7 +100,7 @@ custom_styles/focus = SubResource( 3 )
 custom_fonts/font = SubResource( 4 )
 text = "CREDITS"
 
-[node name="ButtonQuit" parent="Menu/MenuBody/Buttonts" instance=ExtResource( 3 )]
+[node name="ButtonQuit" parent="Menu/MenuBody/Buttons" instance=ExtResource( 3 )]
 margin_top = 123.0
 margin_right = 385.0
 margin_bottom = 160.0
@@ -110,7 +110,6 @@ custom_styles/hover = SubResource( 2 )
 custom_styles/focus = SubResource( 3 )
 custom_fonts/font = SubResource( 4 )
 text = "QUIT"
-[connection signal="button_up" from="Menu/MenuBody/Buttonts/ButtonStart" to="." method="_on_ButtonStart_button_up"]
-[connection signal="button_up" from="Menu/MenuBody/Buttonts/ButtonHelp" to="." method="_on_ButtonHelp_button_up"]
-[connection signal="button_up" from="Menu/MenuBody/Buttonts/ButtonCredits" to="." method="_on_ButtonCredits_button_up"]
-[connection signal="button_up" from="Menu/MenuBody/Buttonts/ButtonQuit" to="." method="_on_ButtonQuit_button_up"]
+
+[node name="MenuConfirm" parent="." instance=ExtResource( 2 )]
+is_active = false

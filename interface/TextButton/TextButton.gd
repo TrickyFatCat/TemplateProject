@@ -84,6 +84,7 @@ func _switch_mouse_filter(_device_index: int) -> void:
 func _set_is_active(value: bool) -> void:
 	is_active = value
 	disabled = not value
+	_change_font_color(font_color_normal)
 
 	if disabled:
 		mouse_filter = MOUSE_FILTER_IGNORE

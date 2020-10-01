@@ -1,7 +1,7 @@
 extends CanvasLayer
 
-onready var menuPause := $MenuPause
 onready var dataPanelPlayer := $DataPanelPlayer
+onready var menuPause := $MenuPause
 
 
 func _notification(what: int) -> void:
@@ -10,8 +10,6 @@ func _notification(what: int) -> void:
 			Events.connect("transition_screen_opened", self, "_open_pause_menu", [], CONNECT_ONESHOT)
 		else:
 			_open_pause_menu()
-
-		
 
 
 func _input(event: InputEvent) -> void:
