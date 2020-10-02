@@ -14,13 +14,6 @@ func _init() -> void:
 	connect("body_entered", self, "_on_body_entered")
 
 
-func _on_area_entered(area: Area2D) -> void:
-	# if not is_invulnerable and area.is_damaging:
-	# 	emit_signal("get_damage", area.damage)
-	# TODO rethink this part of the code.
-	pass
-
-
 func _on_body_entered(body: KinematicBody2D) -> void:
 	if not is_invulnerable:
 		emit_signal("get_damage", body.damage)

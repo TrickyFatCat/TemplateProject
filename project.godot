@@ -361,6 +361,7 @@ ui_exit={
 2d_physics/layer_5="EnemyProjectile"
 2d_physics/layer_6="Explosion"
 2d_physics/layer_7="AreaDamage"
+2d_physics/layer_8="Pickup"
 
 [rendering]
 
