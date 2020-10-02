@@ -213,6 +213,7 @@ GameSaver="*res://src/singletons/GameSaver.gd"
 TransitionScreen="*res://src/singletons/TransitionScreen/TransitionScreen.tscn"
 GameManager="*res://src/singletons/GameManager.gd"
 InputManager="*res://src/singletons/InputManager.gd"
+AudioPlayer="*res://src/singletons/AudioPlayer.gd"
 
 [display]
 
