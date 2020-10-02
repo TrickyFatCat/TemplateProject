@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://interface/fonts/Play-Bold.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://interface/Hud/MenuPause/MenuPause.gd" type="Script" id=2]
 [ext_resource path="res://interface/TextButton/TextButton.tscn" type="PackedScene" id=3]
 [ext_resource path="res://interface/MenuConfirm/MenuConfirm.tscn" type="PackedScene" id=4]
+[ext_resource path="res://interface/main/BackgroundHud.tscn" type="PackedScene" id=5]
 
 [sub_resource type="DynamicFont" id=1]
 size = 48
@@ -27,13 +28,7 @@ __meta__ = {
 }
 is_active = false
 
-[node name="Background" type="ColorRect" parent="."]
-anchor_right = 1.0
-anchor_bottom = 1.0
-color = Color( 0, 0, 0, 0.435294 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="Background" parent="." instance=ExtResource( 5 )]
 
 [node name="Menu" type="CenterContainer" parent="."]
 anchor_right = 1.0

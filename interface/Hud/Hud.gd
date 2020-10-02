@@ -2,13 +2,14 @@ extends CanvasLayer
 
 onready var dataPanelPlayer := $DataPanelPlayer
 onready var menuPause := $MenuPause
+onready var menuGameOver := $MenuGameOver
 
 
 func _notification(what: int) -> void:
 	if what == MainLoop.NOTIFICATION_WM_FOCUS_OUT:
 		if TransitionScreen.is_transitionig():
 			Events.connect("transition_screen_opened", self, "_open_pause_menu", [], CONNECT_ONESHOT)
-		else:
+		elif not menuGameOver.is_active:
 			_open_pause_menu()
 
 
@@ -25,6 +26,7 @@ func _ready() -> void:
 	Events.connect("restart_level", self, "_deactivate_input")    
 	Events.connect("level_exit", self, "_deactivate_input")   
 	Events.connect("level_finished", self, "_deactivate_input")
+	Events.connect("player_dead", self, "_open_menu_gameover")
 
 
 func _deactivate_input() -> void:
@@ -43,3 +45,9 @@ func _close_pause_menu() -> void:
 	menuPause.close_menu()
 	dataPanelPlayer.is_active = true
 	Events.emit_signal("close_menu_pause")
+
+
+func _open_menu_gameover() -> void:
+	menuGameOver.open_menu()
+	dataPanelPlayer.is_active = false
+	set_process_input(false)
