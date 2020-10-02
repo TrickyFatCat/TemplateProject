@@ -29,7 +29,8 @@ onready var weapon : Weapon = $BaseWeapon
 
 func _ready() -> void:
 	weapon.connect("shoot", self, "_process_shoot")
-	_switch_weapon(0)
+	yield(GameManager.current_level, "ready")
+	_switch_weapon(_get_slot_weapon_id(slot_active))
 
 
 func _unhandled_input(event: InputEvent) -> void:
